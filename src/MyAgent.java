@@ -62,10 +62,14 @@ public class MyAgent extends DevelopmentAgent {
                     }
                     //do stuff with snakes
                     board.addSnake(newSnake);
-                } 
+                }
                 // finished reading, calculate move:
-                ArrayList<Point> path = getAStarMovement(me, apple);
-                System.out.println(getStep(me, path.get(path.size()-1)));
+                ArrayList<Point> path = getAStarPath(me, apple);
+                if(path.size() > 0) {
+                    System.out.println(getStep(me, path.get(path.size() - 1)));
+                } else {
+                    System.out.println(getSimpleMovement(me, apple));
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,10 +93,11 @@ public class MyAgent extends DevelopmentAgent {
     }
 
     private int getStep(Snake snake, Point target) {
+        //TODO: Make this not stupid (more stupid?)
         return getSimpleMovement(snake, target);
     }
 
-    private ArrayList<Point> getAStarMovement(Snake snake, Point target) {
+    private ArrayList<Point> getAStarPath(Snake snake, Point target) {
         Point head = snake.corners[0];
 
         ArrayList<Point> closed = new ArrayList<>();
@@ -114,14 +119,11 @@ public class MyAgent extends DevelopmentAgent {
             open.remove(current);
             closed.add(current);
 
-            for (Point n : getNeighbours(current)) {
+            ArrayList<Point> neighbours = getNeighbours(current);
+            double gScore = gScores.get(current) + 1;
+            for (Point n : neighbours) {
                 if (closed.contains(n)) {
                     continue;
-                }
-
-                double gScore = gScores.get(current) + 1;
-                if (n.owner != 0) {
-                    gScore = Double.POSITIVE_INFINITY;
                 }
 
                 if (!open.contains(n)) {
@@ -136,7 +138,7 @@ public class MyAgent extends DevelopmentAgent {
             }
         }
         log("no path");
-        return null;
+        return new ArrayList<>();
     }
 
     private ArrayList<Point> traceBack(HashMap<Point,Point> cameFrom, Point target) {
@@ -151,16 +153,16 @@ public class MyAgent extends DevelopmentAgent {
 
     private ArrayList<Point> getNeighbours(Point p) {
         ArrayList<Point> points = new ArrayList<>();
-        if (p.x > 0) {
+        if (p.x > 0 && (board.at(p.x-1, p.y).owner == 0)) {
             points.add(new Point(p.x - 1, p.y));
         }
-        if (p.x < board.width - 1) {
+        if (p.x < board.width - 1 && (board.at(p.x+1, p.y).owner == 0)) {
             points.add(new Point(p.x + 1, p.y));
         }
-        if (p.y > 0) {
+        if (p.y > 0 && (board.at(p.x, p.y-1).owner == 0)) {
             points.add(new Point(p.x , p.y - 1));
         }
-        if (p.x < board.height - 1) {
+        if (p.y < board.height - 1 && (board.at(p.x, p.y+1).owner == 0)) {
             points.add(new Point(p.x, p.y + 1));
         }
         return points;

@@ -18,6 +18,20 @@ public class Snake {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if ((o == null) || getClass() != o.getClass()) return false;
+        Snake other = (Snake)o;
+        if (other.id != this.id) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
     public int getHeading(){
         Point head = corners[0];
         Point neck = corners[1];
