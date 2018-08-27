@@ -1,1 +1,8 @@
 /bin/
+
+/.idea/
+/.settings/
+/lib/
+ExampleSnake.iml
+.project
+.classpath
