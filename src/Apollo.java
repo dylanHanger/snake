@@ -4,7 +4,8 @@ import za.ac.wits.snake.DevelopmentAgent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.lang.reflect.Array;
+import java.util.*;
 
 class Direction {
     public static final int NORTH = 0;
@@ -52,10 +53,14 @@ class Direction {
     }
 }
 
-class Point {
+class Point implements Comparable<Point> {
     public int x;
     public int y;
     public boolean occupied;
+
+    // Path-finding stuff
+    public double fScore = -1;
+    public double gScore = -1;
 
     public Point(int x, int y) {
         this.x = x;
@@ -80,6 +85,11 @@ class Point {
     public int hashCode() {
         // Cantor's
         return ((x + y)*(x + y + 1)/2) + y;
+    }
+
+    @Override
+    public int compareTo(Point point) {
+        return Double.compare(this.gScore + this.fScore, point.gScore + point.fScore);
     }
 
     public String toString(){
@@ -123,6 +133,8 @@ class Snake {
 
 public class Apollo extends DevelopmentAgent {
 
+    int w;
+    int h;
     Point[][] grid;
 
     public static void main(String args[])  {
@@ -141,8 +153,8 @@ public class Apollo extends DevelopmentAgent {
             String[] temp = initString.split(" ");
             int nSnakes = Integer.parseInt(temp[0]);
 
-            int w = Integer.parseInt(temp[1]);
-            int h = Integer.parseInt(temp[2]);
+            w = Integer.parseInt(temp[1]);
+            h = Integer.parseInt(temp[2]);
             grid = new Point[h][w];
             for (int y = 0; y < h; y++) {
                 for (int x = 0; x < w; x++) {
@@ -205,7 +217,12 @@ public class Apollo extends DevelopmentAgent {
                     // do stuff with snakes
                 }
                 // finished reading, calculate move:
-                System.out.println(getSimpleMovement(me, apple));
+                ArrayList<Point> path = findPath(myHead, apple);
+                if (path.size() > 0) {
+                    System.out.println(getSimpleMovement(me, path.get(path.size() - 1)));
+                } else {
+                    System.out.println(getSimpleMovement(me, myTail));
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -227,5 +244,83 @@ public class Apollo extends DevelopmentAgent {
         }
         return direction;
     }
+
+    private ArrayList<Point> findPath(Point start, Point target) {
+        PriorityQueue<Point> frontier = new PriorityQueue<>();
+        frontier.add(start);
+
+        HashMap<Point, Point> cameFrom = new HashMap<>();
+        cameFrom.put(start, start);
+
+        start.fScore = estimateCost(start, target);
+        start.gScore = 0;
+
+        Iterator<Point> iterator = frontier.iterator();
+        while (iterator.hasNext()) {
+            Point current = frontier.poll();
+
+            if (current.equals(target)) {
+                log("Found target");
+                return traceBack(cameFrom, target);
+            }
+
+            double gScore = current.gScore + 1;
+            for (Point n : getNeighbours(current)) {
+                if (n.gScore == -1 || gScore < n.gScore) {
+                    n.gScore = gScore;
+                    frontier.add(n);
+                    cameFrom.put(n, current);
+                }
+            }
+        }
+        return new ArrayList<>();
+    }
+
+    private ArrayList<Point> traceBack(HashMap<Point, Point> cameFrom, Point target) {
+        ArrayList<Point> path = new ArrayList<>();
+        Point current = target;
+        int i = 0;
+        log("There are "+cameFrom.size()+" points in cameFrom. "+current+" came from "+cameFrom.get(current));
+        while (cameFrom.get(current) != current) {
+            log("which came from "+cameFrom.get(current));
+            path.add(current);
+            current = cameFrom.get(current);
+            i++;
+        }
+        log("Path length: "+i);
+        return path;
+    }
+
+    private ArrayList<Point> getNeighbours(Point point){
+        ArrayList<Point> neighbours = new ArrayList<>();
+        if (point.x > 0 && !grid[point.y][point.x - 1].occupied) {
+            neighbours.add(grid[point.y][point.x - 1]);
+        }
+        if (point.x < w - 1 && !grid[point.y][point.x + 1].occupied) {
+            neighbours.add(grid[point.y][point.x + 1]);
+        }
+        if (point.y > 0 && !grid[point.y - 1][point.x].occupied) {
+            neighbours.add(grid[point.y - 1][point.x]);
+        }
+        if (point.y < h - 1 && !grid[point.y + 1][point.x].occupied) {
+            neighbours.add(grid[point.y + 1][point.x]);
+        }
+        return neighbours;
+    }
+
+    private Point lowestFScore(ArrayList<Point> set) {
+        Point best = set.get(0);
+        for (Point p : set) {
+            if (best.fScore < p.fScore) {
+                best = p;
+            }
+        }
+        return best;
+    }
+
+    private double estimateCost(Point a, Point b) {
+        return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+    }
+
 
 }

@@ -1,4 +1,4 @@
-num_snakes 4
+num_snakes 2
 game_width 50
 game_height 50
 duration 300
