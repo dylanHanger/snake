@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d41aa0f9-e4c4-4468-8914-040c977d9e72" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/snake_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/snake_config.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Apollo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Apollo.java" afterDir="false" />
     </list>
@@ -31,12 +30,13 @@
     <session id="165018738">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.39" value="1" />
           <entry key="project.open.time.40" value="1" />
           <entry key="project.open.time.49" value="2" />
           <entry key="project.open.time.63" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -53,12 +53,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="16302" />
+          <entry key="java" value="17648" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="16302" />
+          <entry key="JAVA" value="17648" />
         </counts>
       </usages-collector>
     </session>
@@ -68,17 +68,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Apollo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="283" selection-start-line="283" selection-end-line="283" />
+            <state relative-caret-position="309">
+              <caret line="276" column="33" lean-forward="true" selection-start-line="276" selection-start-column="33" selection-end-line="276" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#Direction#0" />
                 <element signature="method#relativeTo#0;class#Direction#0" />
                 <element signature="method#getHeading#0;class#Direction#0" />
-                <element signature="e#2327#2328#0" expanded="true" />
-                <element signature="e#2420#2421#0" expanded="true" />
+                <element signature="class#Point#0" />
+                <element signature="e#2383#2384#0" expanded="true" />
+                <element signature="e#2422#2423#0" expanded="true" />
                 <element signature="class#Snake#0" />
                 <element signature="method#equals#0;class#Snake#0" />
+                <element signature="e#11120#11121#0" expanded="true" />
+                <element signature="e#11184#11185#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -98,6 +101,8 @@
       <find>log</find>
       <find>1`</find>
       <find>Deve</find>
+      <find>[X][Y]</find>
+      <find>x][</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -154,14 +159,14 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535535299253" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535653790114" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -215,11 +220,12 @@
       <workItem from="1535387586291" duration="8493000" />
       <workItem from="1535465394717" duration="7770000" />
       <workItem from="1535532469242" duration="2825000" />
+      <workItem from="1535650657777" duration="3119000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42132000" />
+    <option name="totallyTimeSpent" value="45251000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -233,7 +239,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14179105" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1433902" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -277,6 +283,7 @@
         <watch expression="((HashMap.Node)cameFrom.entrySet().toArray()[6]).getKey()" custom="java.util.HashMap.Node" />
         <watch expression="((HashMap.Node)cameFrom.entrySet().toArray()[6]).getKey()" custom="java.util.HashMap.Node" />
         <watch expression="head" />
+        <watch expression="cameFrom.entrySet().toArray()[5]" />
       </configuration>
     </watches-manager>
   </component>
@@ -416,17 +423,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Apollo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="283" selection-start-line="283" selection-end-line="283" />
+        <state relative-caret-position="309">
+          <caret line="276" column="33" lean-forward="true" selection-start-line="276" selection-start-column="33" selection-end-line="276" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#Direction#0" />
             <element signature="method#relativeTo#0;class#Direction#0" />
             <element signature="method#getHeading#0;class#Direction#0" />
-            <element signature="e#2327#2328#0" expanded="true" />
-            <element signature="e#2420#2421#0" expanded="true" />
+            <element signature="class#Point#0" />
+            <element signature="e#2383#2384#0" expanded="true" />
+            <element signature="e#2422#2423#0" expanded="true" />
             <element signature="class#Snake#0" />
             <element signature="method#equals#0;class#Snake#0" />
+            <element signature="e#11120#11121#0" expanded="true" />
+            <element signature="e#11184#11185#0" expanded="true" />
           </folding>
         </state>
       </provider>

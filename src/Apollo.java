@@ -1,10 +1,8 @@
-import com.sun.istack.internal.NotNull;
 import za.ac.wits.snake.DevelopmentAgent;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.*;
 
 class Direction {
@@ -146,6 +144,8 @@ public class Apollo extends DevelopmentAgent {
         System.out.println("log "+msg);
     }
 
+    int turn = 0;
+
     @Override
     public void run() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
@@ -166,6 +166,7 @@ public class Apollo extends DevelopmentAgent {
             int appleScore = 50;
 
             while (true) {
+                turn++;
                 String line = br.readLine();
                 if (line.contains("Game Over")) {
                     break;
@@ -176,6 +177,7 @@ public class Apollo extends DevelopmentAgent {
                 if (apple.equals(lastApple)) {
                     appleScore -= 1;
                 } else {
+                    log("New apple");
                     appleScore = 50;
                     lastApple = apple;
                 }
@@ -197,13 +199,13 @@ public class Apollo extends DevelopmentAgent {
                             int minY = Math.min(a.y, b.y);
                             int maxY = Math.max(a.y, b.y);
                             for (int y = minY; y <= maxY; y++) {
-                                grid[a.x][y].occupied = true;
+                                grid[y][a.x].occupied = true;
                             }
                         } else if (a.y == b.y){
                             int minX = Math.min(a.x, b.x);
                             int maxX = Math.max(a.x, b.x);
                             for (int x = minX; x <= maxX; x++) {
-                                grid[x][a.y].occupied = true;
+                                grid[a.y][x].occupied = true;
                             }
                         }
                     }
@@ -218,10 +220,11 @@ public class Apollo extends DevelopmentAgent {
                 }
                 // finished reading, calculate move:
                 ArrayList<Point> path = findPath(myHead, apple);
+                path = new ArrayList<>();
                 if (path.size() > 0) {
                     System.out.println(getSimpleMovement(me, path.get(path.size() - 1)));
                 } else {
-                    System.out.println(getSimpleMovement(me, myTail));
+                    System.out.println(getSimpleMovementWithAvoidance(me, apple));
                 }
             }
         } catch (IOException e) {
@@ -245,6 +248,47 @@ public class Apollo extends DevelopmentAgent {
         return direction;
     }
 
+    private int getSimpleMovementWithAvoidance(Snake snake, Point target) {
+        Point head = snake.corners[0];
+        int targetDirection = getSimpleMovement(snake, target);
+        int i = 0;
+        while(!isLegalMove(head, targetDirection) && i < 3) {
+            targetDirection = (targetDirection + 1) % 4;
+            i++;
+        }
+        return targetDirection;
+    }
+
+    private boolean isLegalMove(Point from, int direction) {
+        switch (direction) {
+            case Direction.NORTH:
+                if (from.y > 0) {
+                    return !(grid[from.y - 1][from.x].occupied);
+                } else {
+                    return false;
+                }
+            case Direction.SOUTH:
+                if (from.y < h - 1) {
+                    return !(grid[from.y + 1][from.x].occupied);
+                } else {
+                    return false;
+                }
+            case Direction.WEST:
+                if (from.x > 0) {
+                    return !(grid[from.y][from.x - 1].occupied);
+                } else {
+                    return false;
+                }
+            case Direction.EAST:
+                if (from.x < w - 1) {
+                    return (grid[from.y][from.x + 1].occupied);
+                } else {
+                    return false;
+                }
+            default: return false;
+        }
+    }
+
     private ArrayList<Point> findPath(Point start, Point target) {
         PriorityQueue<Point> frontier = new PriorityQueue<>();
         frontier.add(start);
@@ -258,9 +302,8 @@ public class Apollo extends DevelopmentAgent {
         Iterator<Point> iterator = frontier.iterator();
         while (iterator.hasNext()) {
             Point current = frontier.poll();
-
             if (current.equals(target)) {
-                log("Found target");
+                log(turn+": Found target");
                 return traceBack(cameFrom, target);
             }
 
@@ -279,15 +322,10 @@ public class Apollo extends DevelopmentAgent {
     private ArrayList<Point> traceBack(HashMap<Point, Point> cameFrom, Point target) {
         ArrayList<Point> path = new ArrayList<>();
         Point current = target;
-        int i = 0;
-        log("There are "+cameFrom.size()+" points in cameFrom. "+current+" came from "+cameFrom.get(current));
         while (cameFrom.get(current) != current) {
-            log("which came from "+cameFrom.get(current));
             path.add(current);
             current = cameFrom.get(current);
-            i++;
         }
-        log("Path length: "+i);
         return path;
     }
 
