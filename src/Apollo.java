@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 class Direction {
+    public static final int NONE = -1;
     public static final int NORTH = 0;
     public static final int SOUTH = 1;
     public static final int WEST = 2;
@@ -49,16 +50,29 @@ class Direction {
         }
         return FORWARD;
     }
+
+    public static int opposite(int direction) {
+        switch (direction) {
+            case NORTH: return SOUTH;
+            case SOUTH: return NORTH;
+            case EAST: return WEST;
+            case WEST: return EAST;
+            case LEFT: return RIGHT;
+            case RIGHT: return LEFT;
+            default: return direction;
+        }
+    }
 }
 
 class Point implements Comparable<Point> {
-    public int x;
-    public int y;
-    public boolean occupied;
+    public int x = -1;
+    public int y = -1;
+    public int owner = 0;
 
     // Path-finding stuff
     public double fScore = -1;
     public double gScore = -1;
+    public double hScore = -1;
 
     public Point(int x, int y) {
         this.x = x;
@@ -87,7 +101,7 @@ class Point implements Comparable<Point> {
 
     @Override
     public int compareTo(Point point) {
-        return Double.compare(this.gScore + this.fScore, point.gScore + point.fScore);
+        return Double.compare(this.fScore, point.fScore);
     }
 
     public String toString(){
@@ -102,6 +116,11 @@ class Snake {
     public int kills;
     public Point[] corners;
 
+    Point head;
+    Point neck;
+    Point bum;
+    Point tail;
+
     public Snake(int id, String[] data) {
         corners = new Point[data.length - 3];
         this.id = id;
@@ -112,6 +131,12 @@ class Snake {
         for (int i = 3; i < data.length; i++) {
             corners[i-3] = new Point(data[i].split(","));
         }
+
+        if (!alive) return;
+        head = corners[0];
+        neck = corners[1];
+        bum = corners[corners.length - 2];
+        tail = corners[corners.length - 1];
     }
 
     @Override
@@ -131,27 +156,38 @@ class Snake {
 
 public class Apollo extends DevelopmentAgent {
 
+    int nSnakes = 0;
+    int mySnakeNum = 0;
+    Snake me;
+    Snake[] snakes;
+
     int w;
     int h;
     Point[][] grid;
+
+    Point apple;
 
     public static void main(String args[])  {
         Apollo agent = new Apollo();
         Apollo.start(agent, args);
     }
 
-    void log(String msg) {
+    void log(Object msg) {
         System.out.println("log "+msg);
     }
 
     int turn = 0;
+    int lastMove;
 
     @Override
     public void run() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             String initString = br.readLine();
             String[] temp = initString.split(" ");
-            int nSnakes = Integer.parseInt(temp[0]);
+
+            nSnakes = Integer.parseInt(temp[0]);
+
+            snakes = new Snake[nSnakes];
 
             w = Integer.parseInt(temp[1]);
             h = Integer.parseInt(temp[2]);
@@ -163,7 +199,9 @@ public class Apollo extends DevelopmentAgent {
             }
 
             Point lastApple = null;
-            int appleScore = 50;
+            int appleScore = 30;
+
+            Point center = new Point(w/2, h/2);
 
             while (true) {
                 turn++;
@@ -173,23 +211,30 @@ public class Apollo extends DevelopmentAgent {
                 }
 
                 // do stuff with apple
-                Point apple = new Point(line.split(" "));
+                apple = new Point(line.split(" "));
                 if (apple.equals(lastApple)) {
                     appleScore -= 1;
                 } else {
-                    log("New apple");
-                    appleScore = 50;
+                    appleScore = 30;
                     lastApple = apple;
                 }
 
-                int mySnakeNum = Integer.parseInt(br.readLine());
+                // reset the board
+                for (int y = 0; y < h; y++) {
+                    for (int x = 0; x < w; x++) {
+                        Point p = grid[y][x];
+                        p.owner = 0;
+                        p.fScore = -1;
+                        p.gScore = -1;
+                    }
+                }
+
+                mySnakeNum = Integer.parseInt(br.readLine());
                 Snake me = null;
-                Point myHead = null;
-                Point myTail = null;
                 for (int i = 0; i < nSnakes; i++) {
                     String[] snakeData = br.readLine().split(" ");
-                    Snake newSnake = new Snake(i+1, snakeData);
-
+                    Snake newSnake = new Snake(i, snakeData);
+                    snakes[i] = newSnake;
                     // add the snake onto the board
                     for (int k = 0; k < newSnake.corners.length - 1; k++) {
                         Point a = newSnake.corners[k];
@@ -199,13 +244,13 @@ public class Apollo extends DevelopmentAgent {
                             int minY = Math.min(a.y, b.y);
                             int maxY = Math.max(a.y, b.y);
                             for (int y = minY; y <= maxY; y++) {
-                                grid[y][a.x].occupied = true;
+                                grid[y][a.x].owner = i;
                             }
                         } else if (a.y == b.y){
                             int minX = Math.min(a.x, b.x);
                             int maxX = Math.max(a.x, b.x);
                             for (int x = minX; x <= maxX; x++) {
-                                grid[a.y][x].occupied = true;
+                                grid[a.y][x].owner = i;
                             }
                         }
                     }
@@ -213,18 +258,22 @@ public class Apollo extends DevelopmentAgent {
                     if (i == mySnakeNum) {
                         // hey! That's me :)
                         me = newSnake;
-                        myHead = newSnake.corners[0];
-                        myTail = newSnake.corners[newSnake.corners.length - 1];
                     }
                     // do stuff with snakes
                 }
                 // finished reading, calculate move:
-                ArrayList<Point> path = findPath(myHead, apple);
-                path = new ArrayList<>();
-                if (path.size() > 0) {
-                    System.out.println(getSimpleMovement(me, path.get(path.size() - 1)));
+
+                int[] move = getAStarMovement(me.head, apple);
+                if (move[0] != Direction.NONE && move[1] < appleScore) {
+                    lastMove = move[0];
+                    System.out.println(move[0]);
                 } else {
-                    System.out.println(getSimpleMovementWithAvoidance(me, apple));
+                    int i = 0;
+                    int newMove = lastMove;
+                    if (me.alive && !isLegalMove(newMove)) {
+                        lastMove = Direction.opposite(lastMove);
+                        setDirection(newMove);
+                    }
                 }
             }
         } catch (IOException e) {
@@ -232,133 +281,195 @@ public class Apollo extends DevelopmentAgent {
         }
     }
 
-    private int getSimpleMovement(Snake snake, Point target) {
-        Point head = snake.corners[0];
+    private int getSimpleMovement(Point target) {
+        Point head = me.corners[0];
         int direction = Direction.relativeTo(target, head);
         switch(direction) {
             case Direction.NORTH:
-                if (Direction.getHeading(snake) == Direction.SOUTH) return Direction.WEST; break;
+                if (Direction.getHeading(me) == Direction.SOUTH) return Direction.WEST; break;
             case Direction.SOUTH:
-                if (Direction.getHeading(snake) == Direction.NORTH) return Direction.EAST; break;
+                if (Direction.getHeading(me) == Direction.NORTH) return Direction.EAST; break;
             case Direction.EAST:
-                if (Direction.getHeading(snake) == Direction.WEST) return Direction.NORTH; break;
+                if (Direction.getHeading(me) == Direction.WEST) return Direction.NORTH; break;
             case Direction.WEST:
-                if (Direction.getHeading(snake) == Direction.EAST) return Direction.SOUTH; break;
+                if (Direction.getHeading(me) == Direction.EAST) return Direction.SOUTH; break;
         }
         return direction;
     }
 
-    private int getSimpleMovementWithAvoidance(Snake snake, Point target) {
-        Point head = snake.corners[0];
-        int targetDirection = getSimpleMovement(snake, target);
-        int i = 0;
-        while(!isLegalMove(head, targetDirection) && i < 3) {
-            targetDirection = (targetDirection + 1) % 4;
-            i++;
-        }
-        return targetDirection;
+    private void getSimpleMovementWithAvoidance(Point target) {
+        int direction = getSimpleMovement(target);
+        setDirection(direction);
     }
 
-    private boolean isLegalMove(Point from, int direction) {
-        switch (direction) {
-            case Direction.NORTH:
-                if (from.y > 0) {
-                    return !(grid[from.y - 1][from.x].occupied);
-                } else {
-                    return false;
-                }
-            case Direction.SOUTH:
-                if (from.y < h - 1) {
-                    return !(grid[from.y + 1][from.x].occupied);
-                } else {
-                    return false;
-                }
-            case Direction.WEST:
-                if (from.x > 0) {
-                    return !(grid[from.y][from.x - 1].occupied);
-                } else {
-                    return false;
-                }
-            case Direction.EAST:
-                if (from.x < w - 1) {
-                    return (grid[from.y][from.x + 1].occupied);
-                } else {
-                    return false;
-                }
-            default: return false;
-        }
-    }
-
-    private ArrayList<Point> findPath(Point start, Point target) {
-        PriorityQueue<Point> frontier = new PriorityQueue<>();
-        frontier.add(start);
+    private int[] getAStarMovement(Point start, Point target) {
+        // Do A* path finding to find the next move
+        ArrayList<Point> open = new ArrayList<>();
+        ArrayList<Point> closed = new ArrayList<>();
 
         HashMap<Point, Point> cameFrom = new HashMap<>();
-        cameFrom.put(start, start);
 
-        start.fScore = estimateCost(start, target);
         start.gScore = 0;
+        open.add(start);
 
-        Iterator<Point> iterator = frontier.iterator();
-        while (iterator.hasNext()) {
-            Point current = frontier.poll();
-            if (current.equals(target)) {
-                log(turn+": Found target");
-                return traceBack(cameFrom, target);
+        while(open.size() > 0) {
+
+            // Find the lowest fScore in the open set
+            Point current = open.get(0);
+            for (Point p : open) {
+                if ((p.gScore + p.hScore) < (current.gScore + current.hScore)) {
+                    current = p;
+                }
             }
+
+            if (current.equals(target)) {
+                break;
+            }
+
+            open.remove(current);
+            closed.add(current);
 
             double gScore = current.gScore + 1;
             for (Point n : getNeighbours(current)) {
-                if (n.gScore == -1 || gScore < n.gScore) {
-                    n.gScore = gScore;
-                    frontier.add(n);
-                    cameFrom.put(n, current);
+
+                if (closed.contains(n)) {
+                    continue;
+                }
+
+                if (!open.contains(n)) {
+                    open.add(n);
+                } else if (n.gScore <= gScore) {
+                    continue;
+                }
+
+                n.hScore = estimateCost(n, apple);
+//                for (int i = 0; i < nSnakes; i++) {
+//                    if (i == mySnakeNum || !snakes[i].alive)
+//                        continue;
+//                    n.hScore += 100 / estimateCost(n, snakes[i].head);
+//                }
+                n.gScore = gScore;
+                cameFrom.put(n, current);
+            }
+
+        }
+
+        Point nextPoint = apple;
+        int distance = 0;
+        while (nextPoint != null && cameFrom.get(nextPoint) != start) {
+            distance += 1;
+            nextPoint = cameFrom.get(nextPoint);
+        }
+
+        int[] move = new int[2];
+        move[1] = distance;
+
+        if (nextPoint == null) {
+            // we failed to find a path
+            move[0] = Direction.NONE;
+        } else if (nextPoint.x > start.x) {
+            move[0] = Direction.EAST;
+        } else if (nextPoint.x < start.x){
+            move[0] = Direction.WEST;
+        } else if (nextPoint.y > start.y) {
+            move[0] = Direction.SOUTH;
+        } else {
+            move[0] = Direction.NORTH;
+        }
+        return move;
+    }
+
+    private Snake getClosestSnake(Point start) {
+        Snake closest = snakes[0];
+        for (Snake snake : snakes) {
+            if (!snake.alive) continue;
+            if (estimateCost(snake.head, start) < estimateCost(closest.head, start)) {
+                closest = snake;
+            }
+        }
+        return closest;
+    }
+
+    private boolean isLegalMove(int direction) {
+        if (me == null || !me.alive) return false;
+        Point head = me.head;
+
+        if (direction == Direction.FORWARD) {
+            direction = Direction.getHeading(me);
+        }
+
+        switch (direction) {
+            case Direction.NORTH:
+                return (head.y > 0) && (grid[head.y - 1][head.x].owner == 0);
+            case Direction.SOUTH:
+                return (head.y < h - 1) && (grid[head.y + 1][head.x].owner == 0);
+            case Direction.EAST:
+                return (head.x < w - 1) && (grid[head.y][head.x + 1].owner == 0);
+            case Direction.WEST:
+                return (head.x > 0) && (grid[head.y][head.x - 1].owner == 0);
+            default: return true;
+        }
+    }
+
+    private void setDirection(int direction) {
+        if (me == null || !me.alive) {
+            log("Null or dead");
+            return;
+        }
+        if (!isLegalMove(direction)) {
+            log("Illegal move: "+direction);
+            if (direction == Direction.NORTH || direction == Direction.SOUTH) {
+                if (me.head.x < w/2) {
+                    if (isLegalMove(Direction.EAST)) {
+                        direction = Direction.EAST;
+                    } else {
+                        direction = Direction.WEST;
+                    }
+                } else {
+                    if (isLegalMove(Direction.WEST)) {
+                        direction = Direction.WEST;
+                    } else {
+                        direction = Direction.EAST;
+                    }
+                }
+            } else if (direction == Direction.WEST || direction == Direction.EAST) {
+                if (me.head.y < h/2) {
+                    if (isLegalMove(Direction.SOUTH)) {
+                        direction = Direction.SOUTH;
+                    } else {
+                        direction = Direction.NORTH;
+                    }
+                } else {
+                    if (isLegalMove(Direction.NORTH)) {
+                        direction = Direction.NORTH;
+                    } else {
+                        direction = Direction.SOUTH;
+                    }
                 }
             }
         }
-        return new ArrayList<>();
-    }
-
-    private ArrayList<Point> traceBack(HashMap<Point, Point> cameFrom, Point target) {
-        ArrayList<Point> path = new ArrayList<>();
-        Point current = target;
-        while (cameFrom.get(current) != current) {
-            path.add(current);
-            current = cameFrom.get(current);
-        }
-        return path;
+        System.out.println(direction);
     }
 
     private ArrayList<Point> getNeighbours(Point point){
         ArrayList<Point> neighbours = new ArrayList<>();
-        if (point.x > 0 && !grid[point.y][point.x - 1].occupied) {
+        if (point.x > 0 && grid[point.y][point.x - 1].owner == 0) {
             neighbours.add(grid[point.y][point.x - 1]);
         }
-        if (point.x < w - 1 && !grid[point.y][point.x + 1].occupied) {
+        if (point.x < w - 1 && grid[point.y][point.x + 1].owner == 0) {
             neighbours.add(grid[point.y][point.x + 1]);
         }
-        if (point.y > 0 && !grid[point.y - 1][point.x].occupied) {
+        if (point.y > 0 && grid[point.y - 1][point.x].owner == 0) {
             neighbours.add(grid[point.y - 1][point.x]);
         }
-        if (point.y < h - 1 && !grid[point.y + 1][point.x].occupied) {
+        if (point.y < h - 1 && grid[point.y + 1][point.x].owner == 0) {
             neighbours.add(grid[point.y + 1][point.x]);
         }
         return neighbours;
     }
 
-    private Point lowestFScore(ArrayList<Point> set) {
-        Point best = set.get(0);
-        for (Point p : set) {
-            if (best.fScore < p.fScore) {
-                best = p;
-            }
-        }
-        return best;
-    }
-
     private double estimateCost(Point a, Point b) {
         return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+        //return Math.sqrt((point.x - apple.x)*(point.x - apple.x) + (point.y - apple.y)*(point.y - apple.y));
     }
-
-
 }
