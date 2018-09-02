@@ -73,7 +73,7 @@ public class MyAgent extends DevelopmentAgent {
 
                 // debugging deaths
                 if(lastMe != null && me.head.distanceTo(lastMe.head) > 1) {
-                    log("I was at: "+lastMe.head);
+                    log("I died at "+lastMe.head);
                     log("I was trying to move "+Direction.toString(lastMove) + " into "+getNextHead(lastMe, lastMove));
                     for (int x = Math.max(0, lastMe.head.x - 1); x < Math.min(w, lastMe.head.x + 2); x++) {
                         for (int y = Math.max(0, lastMe.head.y - 1); y < Math.min(h, lastMe.head.y + 2); y++) {
@@ -87,6 +87,7 @@ public class MyAgent extends DevelopmentAgent {
                         }
                         log(row.toString());
                     }
+                    log("Respawned");
                 }
 
                 // reset the map
@@ -114,12 +115,12 @@ public class MyAgent extends DevelopmentAgent {
 
                 int[] move = getAStarMovement(me, apple);
 
-                if (move[0] == Direction.NONE || move[1] > appleScore) {
+                if (move[0] == Direction.NONE || move[1] > appleScore || getClosestSnakeID(apple) != me.id) {
                     move[0] = getSweepMovement(me, me.head.directionTo(center));
                 }
 
 
-                // ensure our final move is legal and output it
+                // ensure our final move is safe and/or legal and output it
                 move[0] = makeSafe(me, move[0]);
                 if (!isSafeMove(me, move[0])) {
                     move[0] = makeLegal(me, move[0]);
@@ -131,6 +132,20 @@ public class MyAgent extends DevelopmentAgent {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private int getClosestSnakeID(Point point) {
+        double distance = point.distanceTo(me.head);
+        int closestID = me.id;
+        for (int i = 0; i < nSnakes; i++) {
+            if (!snakes[i].alive || snakes[i] == me) continue;
+            double d = point.distanceTo(snakes[i].head);
+            if (d < distance) {
+                distance = d;
+                closestID = snakes[i].id;
+            }
+        }
+        return closestID;
     }
 
     private int makeSafe(Snake snake, int direction) {
@@ -146,11 +161,15 @@ public class MyAgent extends DevelopmentAgent {
             return false;
         }
         Point p = getNextHead(snake, direction);
+
+        // FIXME: This is not working. Should never return true if there is a snake head adjacent to p
         for (Snake s : snakes) {
             if ((!s.alive) || (s == snake)) {
                 continue;
             }
-            if (getNeighbours(s.head).contains(p)) return false;
+            if (p.distanceTo(s.head) == 1.0) {
+                return false;
+            }
         }
         return true;
     }
