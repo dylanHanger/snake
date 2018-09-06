@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d41aa0f9-e4c4-4468-8914-040c977d9e72" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Direction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Direction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyAgent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyAgent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Snake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Snake.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,45 +36,49 @@
     <session id="165018738">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="15" />
           <entry key="project.open.time.13" value="1" />
-          <entry key="project.open.time.33" value="1" />
-          <entry key="project.open.time.37" value="1" />
+          <entry key="project.open.time.33" value="2" />
+          <entry key="project.open.time.37" value="2" />
           <entry key="project.open.time.38" value="1" />
           <entry key="project.open.time.39" value="1" />
           <entry key="project.open.time.40" value="1" />
           <entry key="project.open.time.41" value="1" />
+          <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.45" value="1" />
           <entry key="project.open.time.47" value="1" />
-          <entry key="project.open.time.49" value="2" />
+          <entry key="project.open.time.49" value="3" />
+          <entry key="project.open.time.55" value="1" />
+          <entry key="project.open.time.57" value="1" />
           <entry key="project.open.time.63" value="1" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.open.time.72" value="1" />
+          <entry key="project.opened" value="19" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="22" />
-          <entry key="java" value="37" />
+          <entry key="java" value="38" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="22" />
-          <entry key="JAVA" value="37" />
+          <entry key="JAVA" value="38" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="34354" />
-          <entry key="txt" value="162" />
+          <entry key="java" value="51058" />
+          <entry key="txt" value="277" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="34354" />
-          <entry key="PLAIN_TEXT" value="162" />
+          <entry key="JAVA" value="51058" />
+          <entry key="PLAIN_TEXT" value="277" />
         </counts>
       </usages-collector>
     </session>
@@ -81,21 +88,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MyAgent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="76" column="119" lean-forward="true" selection-start-line="76" selection-start-column="119" selection-end-line="76" selection-end-column="119" />
+            <state relative-caret-position="383">
+              <caret line="146" column="85" selection-start-line="146" selection-start-column="85" selection-end-line="146" selection-end-column="85" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#619#620#0" expanded="true" />
-                <element signature="e#665#666#0" expanded="true" />
-                <element signature="method#makeSafe#0;class#MyAgent#0" />
-                <element signature="method#isSafeMove#0;class#MyAgent#0" />
-                <element signature="method#makeLegal#0;class#MyAgent#0" />
-                <element signature="method#isLegalMove#0;class#MyAgent#0" />
-                <element signature="method#getNextHead#0;class#MyAgent#0" />
-                <element signature="e#4137#4841#0" />
-                <element signature="method#getSweepMovement#0;class#MyAgent#0" />
-                <element signature="e#4847#6986#0" />
-                <element signature="e#6992#7579#0" />
+                <element signature="e#8178#8193#0" />
+                <element signature="e#8142#8264#0" />
+                <element signature="e#11988#12046#0" />
+                <element signature="e#13175#13721#0" />
+                <element signature="e#13726#14606#0" />
+                <element signature="e#14612#15279#0" />
+                <element signature="e#15285#15989#0" />
+                <element signature="e#15995#16793#0" />
+                <element signature="e#16799#17484#0" />
+                <element signature="e#17490#19877#0" />
+                <element signature="e#21158#21625#0" />
+                <element signature="e#24611#24612#0" expanded="true" />
+                <element signature="e#24681#24682#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,17 +112,21 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Snake.java">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="782">
+              <caret line="46" column="36" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Point.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="44" selection-start-line="44" selection-end-line="44" />
+            <state relative-caret-position="85">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
               <folding>
-                <element signature="e#1223#1224#0" expanded="true" />
-                <element signature="e#1262#1263#0" expanded="true" />
+                <element signature="e#1194#1195#0" expanded="true" />
+                <element signature="e#1233#1234#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,12 +135,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Direction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-              <folding>
-                <element signature="e#1014#1015#0" expanded="true" />
-                <element signature="e#1076#1077#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="544">
+              <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -161,6 +170,7 @@
       <find>Direction.Forward</find>
       <find>id</find>
       <find>][y</find>
+      <find>i++ &lt; 4</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -178,9 +188,9 @@
         <option value="$PROJECT_DIR$/src/Brain.java" />
         <option value="$PROJECT_DIR$/src/Apollo.java" />
         <option value="$PROJECT_DIR$/src/Snake.java" />
+        <option value="$PROJECT_DIR$/src/Point.java" />
         <option value="$PROJECT_DIR$/src/Direction.java" />
         <option value="$PROJECT_DIR$/snake_config.txt" />
-        <option value="$PROJECT_DIR$/src/Point.java" />
         <option value="$PROJECT_DIR$/src/MyAgent.java" />
       </list>
     </option>
@@ -192,7 +202,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
+    <option name="x" value="415" />
+    <option name="y" value="-20" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
@@ -202,9 +213,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -221,12 +229,15 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535900400454" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536058573652" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -286,7 +297,14 @@
       <workItem from="1535817405957" duration="12633000" />
       <workItem from="1535835408896" duration="7522000" />
       <workItem from="1535843190421" duration="32000" />
-      <workItem from="1535871176691" duration="21790000" />
+      <workItem from="1535871176691" duration="28794000" />
+      <workItem from="1535962134413" duration="22497000" />
+      <workItem from="1536042851818" duration="11167000" />
+      <workItem from="1536062609062" duration="5540000" />
+      <workItem from="1536071393447" duration="2206000" />
+      <workItem from="1536078496962" duration="516000" />
+      <workItem from="1536173221301" duration="1203000" />
+      <workItem from="1536262081272" duration="13287000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrote everything. It works as it should.&#10;Still need to make it check safe moves correctly though.">
       <created>1535888941312</created>
@@ -295,11 +313,18 @@
       <option name="project" value="LOCAL" />
       <updated>1535888941313</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Didn't change much">
+      <created>1535900776799</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1535900776799</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92876000" />
+    <option name="totallyTimeSpent" value="156296000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -314,7 +339,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15298508" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21108742" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -323,17 +348,16 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.329718" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39804772" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39804772" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286334" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.329718" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3286334" />
-      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.32995737" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -343,6 +367,7 @@
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.32995737" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,8 +377,10 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="Rewrote everything. It works as it should.&#10;Still need to make it check safe moves correctly though." />
-    <option name="LAST_COMMIT_MESSAGE" value="Rewrote everything. It works as it should.&#10;Still need to make it check safe moves correctly though." />
+    <MESSAGE value="Didn't change much" />
+    <option name="LAST_COMMIT_MESSAGE" value="Didn't change much" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -361,15 +388,35 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MyAgent.java</url>
-          <line>89</line>
+          <line>114</line>
           <properties />
-          <option name="timeStamp" value="30" />
+          <option name="timeStamp" value="53" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>(double)turnTime/1000000</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>turnTime</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>p.distanceTo(s.head)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>map[18][30]</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>Direction.toString(lastMe.getHeading())</expression-string>
         <language-id>JAVA</language-id>
@@ -466,11 +513,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Temp/tmp7A76.tmp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1785" />
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/tmp7A76.tmp.java" />
     <entry file="jar://$PROJECT_DIR$/lib/Snake2018-v0.jar!/za/ac/wits/snake/GameStatus.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -510,9 +553,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6545">
           <caret line="421" selection-start-line="421" selection-end-line="421" />
-          <folding>
-            <element signature="e#15631#15632#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -524,8 +564,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/util/function/ToDoubleFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Snake.java">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" column="36" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Direction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/snake_config.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -534,45 +592,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Direction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-          <folding>
-            <element signature="e#1014#1015#0" expanded="true" />
-            <element signature="e#1076#1077#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Point.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
+        <state relative-caret-position="85">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
           <folding>
-            <element signature="e#1223#1224#0" expanded="true" />
-            <element signature="e#1262#1263#0" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+            <element signature="e#1233#1234#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MyAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="76" column="119" lean-forward="true" selection-start-line="76" selection-start-column="119" selection-end-line="76" selection-end-column="119" />
+        <state relative-caret-position="383">
+          <caret line="146" column="85" selection-start-line="146" selection-start-column="85" selection-end-line="146" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#619#620#0" expanded="true" />
-            <element signature="e#665#666#0" expanded="true" />
-            <element signature="method#makeSafe#0;class#MyAgent#0" />
-            <element signature="method#isSafeMove#0;class#MyAgent#0" />
-            <element signature="method#makeLegal#0;class#MyAgent#0" />
-            <element signature="method#isLegalMove#0;class#MyAgent#0" />
-            <element signature="method#getNextHead#0;class#MyAgent#0" />
-            <element signature="e#4137#4841#0" />
-            <element signature="method#getSweepMovement#0;class#MyAgent#0" />
-            <element signature="e#4847#6986#0" />
-            <element signature="e#6992#7579#0" />
+            <element signature="e#8178#8193#0" />
+            <element signature="e#8142#8264#0" />
+            <element signature="e#11988#12046#0" />
+            <element signature="e#13175#13721#0" />
+            <element signature="e#13726#14606#0" />
+            <element signature="e#14612#15279#0" />
+            <element signature="e#15285#15989#0" />
+            <element signature="e#15995#16793#0" />
+            <element signature="e#16799#17484#0" />
+            <element signature="e#17490#19877#0" />
+            <element signature="e#21158#21625#0" />
+            <element signature="e#24611#24612#0" expanded="true" />
+            <element signature="e#24681#24682#0" expanded="true" />
           </folding>
         </state>
       </provider>

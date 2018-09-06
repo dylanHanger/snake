@@ -16,7 +16,7 @@ public class Direction {
             case WEST: return EAST;
             case LEFT: return RIGHT;
             case RIGHT: return LEFT;
-            default: return direction;
+            default: return FORWARD;
         }
     }
 
@@ -26,7 +26,22 @@ public class Direction {
             case SOUTH: return WEST;
             case WEST: return EAST;
             case EAST: return NORTH;
-            default: return direction;
+            default: return FORWARD;
+        }
+    }
+
+    public static int deltaX(int direction) {
+        switch (direction) {
+            case WEST: return -1;
+            case EAST: return 1;
+            default: return 0;
+        }
+    }
+    public static int deltaY(int direction) {
+        switch (direction) {
+            case NORTH: return -1;
+            case SOUTH: return 1;
+            default: return 0;
         }
     }
 
@@ -43,7 +58,7 @@ public class Direction {
             case LEFT: return "LEFT";
             case FORWARD: return "FORWARD";
             case RIGHT: return "RIGHT";
-            default: return "NONE";
+            default: return "NOWHERE";
         }
     }
 }

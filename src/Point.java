@@ -19,8 +19,7 @@ public class Point {
         if ((o == null) || getClass() != o.getClass()) return false;
         Point pt = (Point)o;
         if (pt.x != this.x) return false;
-        if (pt.y != this.y) return false;
-        return true;
+        return pt.y == this.y;
     }
 
     @Override
@@ -39,6 +38,13 @@ public class Point {
         } else {
             return Direction.WEST;
         }
+    }
+
+    public boolean westOf(Point other) {
+        return other.x > this.x;
+    }
+    public boolean northOf(Point other) {
+        return other.y > this.y;
     }
 
     public double distanceTo(Point other) {

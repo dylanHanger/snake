@@ -38,4 +38,17 @@ public class Snake {
             return Direction.WEST;
         }
     }
+
+    public String toString() {
+        switch (id) {
+            case 1: return "Red";
+            case 2: return "Green";
+            case 3: return "Blue";
+            case 4: return "Yellow";
+            case 5: return "Pink";
+            case 6: return "Purple";
+            case 7: return "Cyan";
+            default: return "snake "+id;
+        }
+    }
 }
