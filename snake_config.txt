@@ -3,3 +3,4 @@ game_width 50
 game_height 50
 duration 300
 speed 50
+random_seed apollo

@@ -1,3 +1,4 @@
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import za.ac.wits.snake.DevelopmentAgent;
 
 import java.io.BufferedReader;
@@ -12,6 +13,12 @@ public class MyAgent extends DevelopmentAgent {
     // misc
     private int turn;
     private long turnTime;
+
+    // multi-turn logic
+    private enum State {Attacking, Seeking, Protecting}
+    private State state;
+    private Snake victim;
+    private int attackPhase;
 
     // Representation of map
     private int w, h;
@@ -31,7 +38,6 @@ public class MyAgent extends DevelopmentAgent {
     // positioning
     private Snake lastMe;
     private int lastMove;
-    boolean attacking; // Used for remembering if we are killing another snake
 
     public static void main(String args[]) {
         MyAgent agent = new MyAgent();
@@ -106,7 +112,7 @@ public class MyAgent extends DevelopmentAgent {
 
                 // debugging deaths
                 if(lastMe != null && me.head.distanceTo(lastMe.head) > 1) {
-                    log("I died on turn "+turn+" at "+lastMe.head);
+                    log("I died on turn "+turn+" at "+lastMe.head+" ("+turnTime/1000000+")");
                     log("I was trying to move "+Direction.toString(lastMove) + " into "+getNextHead(lastMe, lastMove));
                     for (int x = Math.max(0, lastMe.head.x - 1); x < Math.min(w, lastMe.head.x + 2); x++) {
                         for (int y = Math.max(0, lastMe.head.y - 1); y < Math.min(h, lastMe.head.y + 2); y++) {
@@ -137,64 +143,194 @@ public class MyAgent extends DevelopmentAgent {
                 findArtPoints();
                 lastMe = me;
 
-                MoveStyle1();
-                //MoveStyle2();
+                doDirectStyleMovement();
+//                doRankedStyleMovement();
+//                doStateMachineStyleMovement();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void MoveStyle2() {
+//    private void doStateMachineStyleMovement() {
+//        switch(state) {
+//            case Attacking:
+//                int myHeading = me.getHeading();
+//                switch(attackPhase) {
+//                    case 0:
+//                        // We need to turn around still. We are heading in the same direction. The first turn of attack
+//                        if (Direction.isVertical(myHeading)) {
+//                            if (me.head.x > victim.head.x) {
+//                                // I am to the east of them
+//                                if (isSafeMove(me, Direction.WEST)) {
+//                                    System.out.println(Direction.WEST);
+//                                    attackPhase++;
+//                                } else {
+//                                    getNextState();
+//                                }
+//                            } else {
+//                                // I am to the west of them
+//                                if (isSafeMove(me, Direction.EAST)) {
+//                                    System.out.println(Direction.EAST);
+//                                    attackPhase++;
+//                                } else {
+//                                    getNextState();
+//                                }
+//                            }
+//                        } else {
+//                            if (me.head.y > victim.head.y) {
+//                                // I am to the south of them
+//                                if (isSafeMove(me, Direction.NORTH)) {
+//                                    System.out.println(Direction.NORTH);
+//                                    attackPhase++;
+//                                } else {
+//                                    getNextState();
+//                                }
+//                            } else {
+//                                // I am to the north of them
+//                                if (isSafeMove(me, Direction.SOUTH)) {
+//                                    System.out.println(Direction.SOUTH);
+//                                    attackPhase++;
+//                                } else {
+//                                    getNextState();
+//                                }
+//                            }
+//                        }
+//                    case 1:
+//                        // The second turn of the attack. We need to move forward
+//                        if (isSafeMove(me, Direction.FORWARD)) {
+//                            System.out.println(Direction.FORWARD);
+//                            attackPhase++;
+//                        } else {
+//                            getNextState();
+//                            attackPhase = 0;
+//                        }
+//                    case 2:
+//                        // The third turn of the attack. We need to turn again
+//                        if (Direction.isVertical(myHeading)) {
+//                            if (me.head.x > victim.head.x) {
+//                                if (isSafeMove(me, Direction.WEST)) {
+//                                    System.out.println(Direction.WEST);
+//                                    attackPhase++;
+//                                } else {
+//                                    getNextState();
+//                                    attackPhase = 0;
+//                                }
+//                            } else {
+//                                if (isSafeMove(me, Direction.EAST)) {
+//                                    System.out.println(Direction.EAST);
+//                                    attackPhase++;
+//                                } else {
+//                                    getNextState();
+//                                    attackPhase = 0;
+//                                }
+//                            }
+//                        } else {
+//                            if (me.head.y > victim.head.y) {
+//                                if (isSafeMove(me, Direction.NORTH)) {
+//                                    System.out.println(Direction.NORTH);
+//                                    attackPhase++;
+//                                } else {
+//                                    getNextState();
+//                                    attackPhase = 0;
+//                                }
+//                            } else {
+//                                if (isSafeMove(me, Direction.SOUTH)) {
+//                                    System.out.println(Direction.SOUTH);
+//                                    attackPhase++;
+//                                } else {
+//                                    getNextState();
+//                                    attackPhase = 0;
+//                                }
+//                            }
+//                        }
+//                        case 3:
+//                            // The last phase of the attack, keep moving forward until they are dead
+//                            if (victim.alive && isViableTarget(me, victim)) {
+//                                System.out.println(Direction.FORWARD);
+//                            }
+//                }
+//            case Seeking:
+//                int[] move = getAStarMovement(me, apple);
+//
+//            case Protecting: getThreadingMovement();
+//        }
+//        getNextState();
+//    }
+//
+//    private void getNextState() {
+//        throw new NotImplementedException();
+//    }
+//
+//    private boolean isViableTarget(Snake snake, Snake victim) {
+//        int myHeading = snake.getHeading();
+//        int victimHeading = victim.getHeading();
+//
+//        if (!victim.alive || victim.equals(snake)) {
+//            return false;
+//        }
+//        if (victimHeading == myHeading) {
+//            // We are travelling the same direction
+//            if (Direction.isVertical(myHeading)) {
+//                return snake.head.x - victim.head.x == 1 && victim.head.distanceTo(snake.head) < (snake.length / 2);
+//            } else {
+//                return snake.head.y - victim.head.y == 1 && victim.head.distanceTo(snake.head) < (snake.length / 2);
+//            }
+//        } else if (attackPhase == 3 && (victimHeading == Direction.opposite(myHeading))) {
+//            return true;
+//        } else return attackPhase == 1 && Direction.isVertical(myHeading) != Direction.isVertical(victimHeading);
+//    }
+
+    private void doRankedStyleMovement() {
         // FIXME: Move priorities are off (taking head on collisions over safe moves)
         Point center = new Point(w/2, h/2);
         int bestMove;
         int bestScore;
-        // GO TO THE APPLE WITH PATH-FINDING
+        int score;
+        // Go to the apple
         int[] move = getAStarMovement(me ,apple);
         bestMove = move[0];
         bestScore = scoreMove(me, move[0]);
 
-        // GO DIRECTLY TO THE CENTER WITHOUT PATH-FINDING
-        move[0] = getSimpleMovement(me, center);
-        int score = scoreMove(me, move[0]);
-        if (bestScore < score) {
-            bestMove = move[0];
-            bestScore = score;
+        // Centralise
+        if (center.distanceTo(me.head) > 5 && (move[1] > appleScore || getClosestSnakeID(apple) != me.id)) {
+            move[0] = getSimpleMovement(me, center);
+            score = scoreMove(me, move[0]);
+            if (score > bestScore) {
+                bestMove = move[0];
+                bestScore = score;
+            }
         }
-        // GO DIRECTLY TO MY TAIL
-        move[0] = getSimpleMovement(me, me.tail);
+
+        // Thread
+        move[0] = getThreadingMovement(me, me.head.directionTo(me.tail));
         score = scoreMove(me, move[0]);
-        if (bestScore < score) {
+        if (score > bestScore) {
             bestMove = move[0];
             bestScore = score;
         }
-        // THREAD TOWARDS THE APPLE
-        move[0] = getThreadingMovement(me, me.head.directionTo(apple));
-        score = scoreMove(me, move[0]);
-        if (bestScore < score) {
-            bestMove = move[0];
-            bestScore = score;
-        }
+
         System.out.println(bestMove);
     }
 
-    private void MoveStyle1() {
+    private boolean centralise;
+    private void doDirectStyleMovement() {
         // TODO: Rework this
         long startTime = System.nanoTime();
         Point center = new Point(w/2, h/2);
-        int[] move = new int[2];
-        // move = getAStarMovement(me, apple);
-        move[0] = getSimpleMovement(me, apple);
+        int[] move = getAStarMovement(me, apple);
+//        move[0] = getSimpleMovement(me, apple);
+//        move[1] = (int)heuristic(me.head, apple);
 
-        if (move[0] == Direction.NONE || move[1] > appleScore || getClosestSnakeID(apple) != me.id) {
-            //move[0] = getThreadingMovement(me, center.directionTo(me.head));
-            if (appleScore > 0) {
-                move[0] = getThreadingMovement(me, me.head.directionTo(apple));
+        if (move[1] > appleScore || getClosestSnakeID(apple) != me.id) {
+            if (center.distanceTo(me.head) > 5 && centralise) {
+                move[0] = getSimpleMovement(me, center);
             } else {
-                move[0] = getThreadingMovement(me, apple.directionTo(me.head));
+                centralise = false;
+                move[0] = getSimpleMovement(me, me.tail);
             }
-            //move[0] = getSimpleMovement(me, center);
+        } else {
+            centralise = true;
         }
 
         // ensure our final move is safe and/or legal and output it
@@ -388,44 +524,6 @@ public class MyAgent extends DevelopmentAgent {
                 || (p.equals(apple) && appleScore < -40));
     }
 
-    private int getOffenseMovement(Snake snake) {
-        // FIXME: 2018/09/03 It gets confused about which snakes it can kill, and forgets it was trying to kill them immediately
-        for (int i = 0; i < nSnakes; i++) {
-            Snake target = snakes[i];
-            if (!target.alive || target.equals(snake)) {
-                continue;
-            }
-
-            if (target.getHeading() == snake.getHeading()) {
-                // Parallel
-                double distance = target.head.distanceTo(snake.head);
-
-            }
-        }
-        return Direction.NONE;
-    }
-
-//    private ArrayList<Point> findDeadEnds(Snake snake) {
-//        // TODO: Find articulation points of biconnected components. Moving from an AP to a point with only 2 legal neighbours is moving into a dead end
-//        ArrayList<Point> deadEnds = new ArrayList<>();
-//        for(Point ap : articulationPoints) {
-//            for (Point n : getNeighbours(ap)) {
-//                if (articulationPoints.contains(n)){
-//                    int validN = 0;
-//                    for (Point m : getNeighbours(n)) {
-//                        if (map[m.y][m.x] == 0 || m.equals(snake.head)) {
-//                            validN++;
-//                        }
-//                    }
-//                    if (validN <= 2) {
-//                        deadEnds.add(n);
-//                    }
-//                }
-//            }
-//        }
-//        return deadEnds;
-//    }
-
     // Dead end detection
     private int outEdgeCount;
     private int id;
@@ -446,6 +544,7 @@ public class MyAgent extends DevelopmentAgent {
             }
         }
     }
+
     private void dfs(Point root, Point at, Point parent, int[][] low, int[][] ids, boolean[][] visited) {
         if (root.equals(parent)) {
             outEdgeCount++;
@@ -470,24 +569,6 @@ public class MyAgent extends DevelopmentAgent {
             }
         }
     }
-
-
-//    Flood-fill (node, target-color, replacement-color):
-//            1. If target-color is equal to replacement-color, return.
-//            2. If color of node is not equal to target-color, return.
-//            3. Set Q to the empty queue.
-//            4. Add node to Q.
-//            5. For each element N of Q:
-//            6.     Set w and e equal to N.
-//            7.     Move w to the west until the color of the node to the west of w no longer matches target-color.
-//            8.     Move e to the east until the color of the node to the east of e no longer matches target-color.
-//            9.     For each node n between w and e:
-//            10.         Set the color of n to replacement-color.
-//            11.         If the color of the node to the north of n is target-color, add that node to Q.
-//            12.         If the color of the node to the south of n is target-color, add that node to Q.
-//            13. Continue looping until Q is exhausted.
-//            14. Return.
-
     // Forest fire algorithm
     private boolean floodFill(Point from, int maxArea) {
         if (map[from.y][from.x] != 0) {
@@ -561,6 +642,7 @@ public class MyAgent extends DevelopmentAgent {
     }
 
     private int getDirectBacktrackMovement(Snake snake, Point target) {
+        //TODO: Finish this, a faster path-finding algorithm
         // Find a straight line in the direction of the target
         Point head = snake.body[0];
         int direction = head.directionTo(target);
@@ -622,7 +704,7 @@ public class MyAgent extends DevelopmentAgent {
         Point start = snake.head;
         open.add(start);
         gScores.put(start, 0);
-        fScores.put(start, start.distanceTo(target));
+        fScores.put(start, heuristic(start, target));
 
         while (!open.isEmpty()) {
             Point current = open.get(0);
@@ -676,6 +758,14 @@ public class MyAgent extends DevelopmentAgent {
         }
         // defaults to 0 (NORTH)
         return result;
+    }
+
+    private void getDStarLiteMovement(Snake snake, Point target) {
+        throw new NotImplementedException();
+    }
+
+    private int getProtectionMovement(Snake snake, Point target) {
+        throw new NotImplementedException();
     }
 
     private ArrayList<Point> getNeighbours(Point p) {

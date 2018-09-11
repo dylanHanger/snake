@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)http://snake.ms.wits.ac.za/docs.php -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       
+        <title>Snake AI 2018</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        <link rel="stylesheet" href="./Snake AI 2018_files/main.css">
+        <link rel="shortcut icon" href="http://snake.ms.wits.ac.za/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="http://snake.ms.wits.ac.za/favicon.ico" type="image/x-icon">
+        <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+        <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+    </head><body class="" style="">
+
+        <!-- Header -->
+        <div id="header" class="reveal">
+            <a class="logo" href="http://snake.ms.wits.ac.za/index.php"><strong>Snake AI Competition</strong> 2018</a>
+            <nav id="nav">
+                <ul>
+                    <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/">Home</a></li>
+                    <li class="opener active" style="-webkit-user-select: none; cursor: pointer; white-space: nowrap; opacity: 1;"><a href="http://snake.ms.wits.ac.za/docs.php" style="cursor: pointer;">Docs</a>
+                        
+                    <ul style="-webkit-user-select: none; display: none; position: absolute;" class="">
+
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#game" style="display: block; cursor: pointer;">Game Mechanics</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#interact" style="display: block; cursor: pointer;">Input and Output</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#scoring" style="display: block; cursor: pointer;">Scoring</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#java" style="display: block; cursor: pointer;">Java</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#cpp" style="display: block; cursor: pointer;">C++</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#python" style="display: block; cursor: pointer;">Python</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#config" style="display: block; cursor: pointer;">Configuration</a></li>
+                        </ul></li><li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/download.php">Downloads</a></li>
+                    <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/submit.php">Submit</a></li>
+                    <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/watch.php">Watch</a></li>                                        
+                    <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/help.php">Help</a></li>
+
+                    
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/login.php">Login</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/register.php">Register</a></li>
+
+                    
+
+                </ul>
+            </nav>
+        </div>
+
+
+
+<!-- Main -->
+<div id="main">
+
+    <!-- Header -->
+    <header>
+        <h1>How it Works</h1>
+    </header>
+
+    <section id="content" class="wrapper">
+
+        <div id="intro" class="inner">
+
+            <p>
+                <strong>[Note: This a first draft. There are probably many typos. 
+                    <a href="https://www.youtube.com/watch?v=bY41eD4lS28">Apologies.</a>]</strong>
+            </p>
+
+            <p>                        
+                The interactive Snake competition is an AI programming challenge
+                currently open only to Wits students or staff members.
+                The task is simple: write a program to play a multiplayer version
+                of the game <a href="https://en.wikipedia.org/wiki/Snake_(video_game)">Snake</a>.
+                The goal? Eat enough apples to become the longest snake on the board.
+                But don't forget about the other players. You'll want to stop them doing 
+                the same thing. <strong>By any means necessary.</strong>
+            </p>
+
+        </div>
+
+    </section>
+
+    <section id="game" class="wrapper style1">
+
+        <div class="inner">
+
+
+            <h2>Game Mechanics</h2>
+
+            <p>                        
+                Here's how it all works. At any point in time, there is a single apple on the board. Eating 
+                the apple causes your snake to grow by a certain length. There are three 
+                main actors in the game: snakes, apples, and power apples.
+                Let's look at the mechanics of each in turn.                        
+            </p>
+
+
+
+            <h3>Snakes</h3>
+
+            <p>
+                Snakes move in one of the four cardinal directions at a speed of one square per timestep,
+                with all moves executed simultaneously. A snake 
+                dies when it collides with any of the grid's sides, or moves into a non-empty and non-apple square.
+                If a snake collides with the body of another snake, the latter is credited with a kill. In the event of a head-on 
+                collision between two snakes, both snakes are killed, but neither is credited with a kill. 
+                When a snake dies, it will miss the next timestep, and be respawned on the following step
+                at a random location on the board.
+                Note that if your program has crashed, your snake will be removed from the board 
+                for the duration of the round.
+            </p>
+
+            <h3>Apples</h3>
+
+            <p>
+                There is a single apple on the board at all times during the game.
+                It appears at a random location at the beginning of the game, and
+                immediately respawns at a random location every time it is eaten. 
+
+                Eating an apple causes a snake to grow for the next few rounds by having its tail remain 
+                in its current position. If multiple snakes consume the same apple at the same time,
+                both snakes are killed and the apple is respawned at a new location.
+                Additionally, the apple  will be respawned if it hasn't been eaten within a certain number of moves.
+
+                Unfortunately, we purchased the apples from a farm that doesn't use preservatives. As a result, 
+                the apple <em>decays</em> over time, becoming worse and worse. Initially, eating the apple is worth 
+                5 points. However, the value of the apple decreases by 0.1 every timestep (rounded up to the nearest
+                integer). When the apple's value is negative, eating it will cause the snake to <em>shrink</em>!
+                Additionally, once the value of the apple worth -6 or less, eating it will immediately kill the snake
+                doing so! So be careful!!
+            </p>
+
+    </div></section>
+
+    <section id="interact" class="wrapper">
+
+        <h2>Interacting with the Game</h2>
+
+        <p>                        
+            Now that we've explained how the game works, let's look at how your agent will actually play the game.
+            Your agent interacts with the game through its standard I/O mechanisms.
+            This means that at every step, your agent will read in the current state of the game, and
+            make its move by printing to standard output.  
+        </p>
+
+        <h3>Initialisation</h3>
+        <p>
+            When the game first starts, each agent is sent an 
+            initialisation string which specifies the number of snakes in the game, the width and height of the
+            board, and the type of game being played (mode). For these purposes, you can assume that the number of snakes
+            is always 4, the width and height 50, and the mode 1. The initial input thus looks like this:
+        </p>
+
+        <pre><code class="language-css">4 50 50 1</code></pre>
+
+
+        <h3>Game-State Updates</h3>
+        <p>
+            At each step in the game, a game-state  string is generated and sent to all agents, which can then be
+            read in via standard input. Coordinates are such that (0,0) represents the top left square of the board.
+            Each state takes the following form:
+        </p>
+        <pre><code class="language-css">
+x- and y-coordinates of the apple
+your snake number (an integer from 0 to 3)
+description of snake 0
+description of snake 1
+description of snake 2
+description of snake 3
+
+</code></pre>
+
+        <p> Each snake is described in the following format:</p>
+        <pre><code class="language-css">alive/dead length kills headX,headY bodyX,bodyY bodyX,bodyY ... tailX,tailY</code></pre>
+
+        <p>
+            To better describe what's going on here, let's look at a concrete example. Imagine that we receive the following game-state:
+        </p>
+        <pre><code class="language-css">
+8 16
+0
+alive 26 2 10,12 15,12 15,7 5,7 5,2
+dead 6 6 14,13 19,13
+alive 2 1 12,13 12,14
+invisible 17 1 9 21,14 21,14 15,14 15,13
+</code></pre>
+
+        <p>
+            In this state, the apple is at (8,16).
+        </p>
+        <p>
+            The next line gives the index of our snake. In this case, we're snake 0, so we're the first one in the next four lines.
+            If we were the last snake, we'd get an index of 3.
+            The next four lines describe each snake in the game. The first word of each line is either "alive", "dead" or "invisible".
+            Dead snakes are not displayed on the game board, and so they should be ignored.
+            Next comes the snake's current length, followed by the number of other snakes it has killed.
+        </p><p>
+
+        </p><p>
+            What follows is the snake's coordinate chain. The coordinate chain is made up of (x,y) coordinates
+            representing points of interest in the snake's body. The first coordinate is the snake's head,
+            the next represents the first kink in the snake. There can be any number of kinks in the snake, all of
+            which are all listed in order. Finally, the last coordinate represents the tail of the snake. 
+            As an example, the 3rd snake has the following description:
+        </p>
+        <p>
+            Lastly the snake's coordinate chain is given. 
+        </p>
+        <pre><code class="language-css">alive 2 1 12,13 12,14</code></pre>
+        <p>
+            This snake is alive, has length 2, and 1 kill. Its head is at position (12, 13) and its tail is at (12, 14). From this we can deduce that the snake is traveling upwards, since the y-coordinate of its head is less than its tail's.
+        </p>
+
+        <h3>Making a Move</h3>
+
+        <p>
+            Once the game-state has been read in, your agent should use that information 
+            to decide on its next move. A move is made simply by printing out an integer in the range 0-6.
+            The available moves are as follows:
+        </p>
+        <div class="table-wrapper">
+            <table>
+
+                <tbody>
+
+                    <tr>
+                        <td><samp>0</samp></td>
+                        <td>Up (relative to the play area - north)</td>
+                    </tr>
+                    <tr>
+                        <td><samp>1</samp></td>
+                        <td>Down (relative to the play area - south)</td>
+                    </tr>
+                    <tr>
+                        <td><samp>2</samp></td>
+                        <td>Left (relative to the play area - west)</td>
+                    </tr>
+                    <tr>
+                        <td><samp>3</samp></td>
+                        <td>Right (relative to the play area - east)</td>
+                    </tr>
+                    <tr>
+                        <td><samp>4</samp></td>
+                        <td>Left (relative to the head of your snake)</td>
+                    </tr>
+                    <tr>
+                        <td><samp>5</samp></td>
+                        <td>Straight (relative to the head of your snake)</td>
+                    </tr>
+                    <tr>
+                        <td><samp>6</samp></td>
+                        <td>Right (relative to the head of your snake)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Note that if you output a move that is opposite to the direction
+                you're currently headed, you will simply continue straight. </p>
+
+
+            <h3>Logging</h3>
+
+            <p>
+                In order to enable some form of logging, the game creates two files per agent, located
+                in the same directory as your program. This is especially useful for Python or C++ agents, as they
+                have no other method of debugging. The first file is an error file which 
+                logs all runtime errors triggered by the code, while the second is a log file which allows your program 
+                to save output. To write to the log file, simply prepend the word <samp>"log"</samp> <strong>and a space</strong> to your print statements.
+                For example, if you output the string <samp>"log message"<samp>,  <samp>"message"</samp> will be appended to
+                        the end of the log file. Anything beginning with <samp>"log "</samp> will not be treated as a game move.
+
+                        </samp></samp></p>
+
+                        <h3>Game Over</h3>
+
+                        <p>When the game has been concluded, instead of a normal game-state, 
+                            a single line containing the words "Game Over" will be sent to each agent. 
+                            This gives you the opportunity to do some last minute cleanup, saving data to files, etc.
+                            before you are shut down. If you do not exit after 500 milliseconds, you will be forcibly shut down.</p>
+
+                        <!--                        
+                                                            <h3>Testing</h3>
+                                                            
+                                                            <p>Aside from debugging your snake using a debugger (if you're writing a Java snake), you can also create test cases for your snake. 
+                                                                The best way to do this is to the the <a href="https://bitbucket.org/Gorthaur/snakevisualiser/wiki/Home">SnakeVisualiser</a> tool.
+                                                                Instructions for using the tool can be found on its wiki. This is highly recommended and will save you lots of time. The idea is simple. 
+                                                                Save your games, go through them to find all the times your snake did the wrong thing, create a test for the game state where it did the wrong thing, debug your code, 
+                                                                and then finally leave your test there so that it can be reused and you don't break your snake when you make changes.</p>-->
+                        </div>
+                        </section>
+
+                        <section id="scoring" class="wrapper style1">
+
+                            <h2>Scoring</h2>
+
+                            <p>
+                                Throughout each game, the longest length achieved by each snake is recorded.
+                                Snakes are ranked based on their longest length, with ties broken
+                                by kill count. If the number of kills is also equal, then the snake with the higher index
+                                takes the win.                  
+                            </p>
+
+                            <p>
+                                As there will be many agents competing, players are organised into divisions, with each division
+                                consisting of 4 agents. In the event that the lowest division does not have enough players, it will
+                                be populated with built-in agents. All divisions play a single game in parallel, and the agents in 
+                                each are ranked as above. Players who finish first in their division are promoted to a higher division,
+                                whilst players who finish last are relegated to a lower one.
+                            </p>
+
+
+                            <p>
+                                The points table provides a weighted average score of each player over all divisions. 
+                                So the player who finishes last in the lowest division is assigned a score of 0, while the 
+                                player who finishes first in the top division is given a score of <samp>(total_players - 1)</samp>.
+                                We also provide an approximate <a href="https://en.wikipedia.org/wiki/Elo_rating_system">Elo</a> rating.
+
+                            </p>
+
+                        </section>
+
+
+                        <section id="java" class="wrapper">
+
+                            <div class="inner">
+
+                                <h2>Creating a Java Agent</h2>
+
+                                <p>                        
+                                    If you're writing your agent in Java, you're in luck. We've made it extremely
+                                    easy to integrate your agent into the game server from your IDE. This gives you the ability
+                                    to debug your code, and allows you to quickly iterate on designs.
+                                </p>
+
+                                <p>                        
+                                    First download the library from our <a href="http://snake.ms.wits.ac.za/download.php">downloads</a> page. Then 
+                                    create a new Java project in your IDE of choice. Under the project's properties, 
+                                    find a setting for libraries, and add the JAR you just downloaded as a compile-time library.
+                                    Still in the properties, find the option that specifies the arguments that are passed to
+                                    the program's main method. Add the following entry to the arguments: <code class="language-java" style="white-space: nowrap">-develop</code>.
+                                    <strong>Note that this must always be the first entry in the arguments</strong>.
+                                    You can also add arguments as described by the Downloads page <a href="http://snake.ms.wits.ac.za/download.php#running">here</a>.
+                                    Here's a screenshot of what it would look like in NetBeans:                        
+                                </p>
+
+                                <span class="image fit" style="padding-left:   40px; padding-right:   40px;">
+                                    <img src="./Snake AI 2018_files/arguments.png" alt="">
+                                </span>
+
+                                <p>
+                                    Now you're ready to create your agent. Simply have your class
+                                    inherit from <var>DevelopmentAgent</var>. Your class must override the
+                                    <var>run()</var> method, which is where you'll put your agent logic.
+                                    To illustrate, here's a sample agent that makes random moves: 
+                                </p>
+
+
+
+                                <pre><code class="language-java">
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
+
+public class MyAgent extends DevelopmentAgent {
+
+    public static void main(String args[]) throws IOException {
+        MyAgent agent = new MyAgent();
+        MyAgent.start(agent, args);
+    }
+
+    @Override
+    public void run() {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            String initString = br.readLine();
+            String[] temp = initString.split(" ");
+            int nSnakes = Integer.parseInt(temp[0]);
+            while (true) {
+                String line = br.readLine();
+                if (line.contains("Game Over")) {
+                    break;
+                }
+                String apple = line;
+                //do stuff with apple
+                int mySnakeNum = Integer.parseInt(br.readLine());
+                for (int i = 0; i &lt; nSnakes; i++) {
+                    String snakeLine = br.readLine();
+                    if (i == mySnakeNum) {
+                        //hey! That's me :)
+                    }
+                    //do stuff with snakes
+                }
+                // finished reading, calculate move:
+                // System.out.println("log calculating...");
+                int move = new Random().nextInt(4);
+                System.out.println(move);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+
+
+                                <p>
+                                    Once you're ready to submit, simply build the JAR and upload it. There's
+                                    no need to make any further changes!
+                                </p>
+
+                            </div>
+
+
+                        </section>
+
+                        <section id="cpp" class="wrapper style1">
+
+                            <div class="inner">
+
+                                <h2>Creating a C++ Agent</h2>
+
+                                <p>                        
+                                    Creating a C++ agent is not as straight-forward as a Java agent. 
+                                    Create your agent and compile it, creating an executable. Attach it to the <a href="http://snake.ms.wits.ac.za/download.php">downloaded JAR file</a> by 
+                                    typing the following from your terminal or command prompt:
+
+                                </p>
+
+                                <pre><code class="language-batch">
+java -jar Snake2018-v0.jar -executable &lt;path_to_executable&gt;
+                    </code></pre>
+
+                                <p>The game will then start with your agent playing against three built-in
+                                    agents. Note that running your agent like this means you'll 
+                                    lose out on the ability to debug. Unfortunately, we don't have a solution to that as yet. 
+                                    For more information about running the JAR file, please see <a href="http://snake.ms.wits.ac.za/download.php#running">this section</a>. </p>
+
+                                <p>
+                                    Below is a sample agent written in C++ to get you started. It
+                                    reads in the input, and outputs a random move.  
+                                </p>
+
+
+
+                                <pre><code class="language-cpp">
+
+#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+
+using namespace std;
+
+int main() {
+    int nSnakes, width, height, mode;
+    cin &gt;&gt; nSnakes &gt;&gt; width &gt;&gt; height &gt;&gt; mode;
+    while (true) {
+        int appleX, appleY;
+        cin &gt;&gt; appleX;
+        if (cin.bad()) {
+            //We have received a "Game Over" message. In which case, exit the
+            //loop
+            cin.clear();
+            break;
+        }
+        //we did not receive game over. Continue reading everything else
+        cin &gt;&gt; appleY;
+        int snakeNum;
+        cin &gt;&gt; snakeNum;
+	cin.ignore();
+        for (int i = 0; i &lt; nSnakes; ++i) {
+            string snakeLine;
+            getline(cin, snakeLine);
+            if (i == snakeNum) {
+                //hey! that's me!
+            }
+            //do stuff with snakes
+        }
+        //finished reading, calculate move:
+        //cout &lt;&lt; "log calculating..." &lt;&lt; endl;
+        int move = rand() % 4;
+        cout &lt;&lt; move &lt;&lt; endl;
+    }
+    return 0;
+}
+
+        
+                                </code></pre>
+
+
+                            </div>
+                        </section>
+
+                        <section id="python" class="wrapper style2">
+
+                            <div class="inner">
+
+                                <h2>Creating a Python Agent</h2>
+
+                                <p>                        
+                                    If you really want to use Python to create your agent, you'll
+                                    have to jump through some hoops. Create your agent in a single
+                                    python file, and attach it to the <a href="http://snake.ms.wits.ac.za/download.php">downloaded JAR file</a> by 
+                                    typing the following from your terminal or command prompt:
+
+                                </p>
+
+                                <pre><code class="language-batch">
+java -jar Snake2017-alpha.jar -python &lt;path_to_py_file&gt;
+                    </code></pre>
+
+                                <p>The game will then start with your agent playing against three built-in
+                                    agents. Note that running your agent like this means you'll 
+                                    lose out on the ability to debug. Unfortunately, we don't have a solution to that as yet. 
+                                    For more information about running the JAR file, please see <a href="http://snake.ms.wits.ac.za/download.php#running">this section</a>. </p>
+
+                                <p>
+                                    Below is a sample agent written in Python to get you started. It
+                                    reads in the input, and outputs a random move.  
+                                </p>
+
+
+
+                                <pre><code class="language-python">
+import random
+
+line = raw_input()
+split = line.split(" ")
+numSnakes = int(split[0])
+
+while (True): #forever
+    line = raw_input()
+    if "Game Over" in line:
+        break
+    apple = line
+    mySnakeNum = int(raw_input())
+    for i in range(numSnakes):
+        line = raw_input()
+        if (i == mySnakeNum):
+            #hey! That's me :)
+        #do stuff with snake
+
+    #finished reading, calculate move:
+    print "log calculating..."
+    move = random.randint(0,4)
+    print move
+        
+</code></pre>
+
+
+                            </div>
+                        </section>
+
+                        <section id="config" class="wrapper style">
+
+                            <h2>The Configuration File</h2>
+
+                            <p><strong>
+                                    Unless you feel very strongly about it, feel free to skip this section.
+                                </strong></p>
+
+                            <p>
+                                The various parameters of the game can be set through a configuration file. 
+                                If you want to use non-default parameters, create a text file with a name
+                                containing the phrase "snake_config" in the directory (or subdirectory) from which the game
+                                is run. Note that if multiple configuration files are found, they will all be applied, 
+                                but we make no guarantee of the order in which this will occur.
+                            </p>
+
+                            <p>
+                                An example of a configuration file, as well as all available parameters and 
+                                their default values, are given below.
+                            </p>
+
+                            <pre><code class="language-css">
+#snake_config.txt
+#Comments are allowed in the file, as are blank lines
+
+num_snakes      8   #add double the number of snakes to the board
+
+#Make the board bigger
+game_width      75 
+game_height     75
+                </code> </pre>
+
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Default Value</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <td><samp>game_width</samp></td>
+                                            <td>50</td>
+                                            <td>The width of the board</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><samp>game_height</samp></td>
+                                            <td>50</td>
+                                            <td>The height of the board</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><samp>decay_rate</samp></td>
+                                            <td>0.1</td>
+                                            <td>The value an apple loses every timestep it is in play</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><samp>duration</samp></td>
+                                            <td>300</td>
+                                            <td>The length of a single round, in seconds</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><samp>speed</samp></td>
+                                            <td>50</td>
+                                            <td>The amount of time each agent is given to calculate a move, in milliseconds</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><samp>num_snakes</samp></td>
+                                            <td>4</td>
+                                            <td>The number of snakes that contest a single round. The game supports
+                                                any number of snakes greater than 1</td>
+                                        </tr>          
+
+                                        <tr>
+                                            <td><samp>random_seed</samp></td>
+                                            <td><code class="language-java">null</code></td>
+                                            <td>This value sets the random number generator's seed, which allows
+                                                for repeatable games. Any string value (including the string "null") 
+                                                can be used to set this configuration.</td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </section>
+
+                        </div>
+
+                        <!-- Footer -->
+<div id="footer">
+    <p class="copyright">Kludged together with duct tape, prayers and <a href="http://www.userspice.com/">UserSpice</a>
+        <br>
+        © Steve James
+        <a href="http://marker.ms.wits.ac.za/snake_tips_tricks.html" title="Congrats! You found it..." id="hints">
+            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+        </a>
+        <br>University of the Witwatersrand, South Africa</p>
+</div>
+
+<!-- Scripts -->
+<script src="./Snake AI 2018_files/jquery.min.js.download"></script>
+<script src="./Snake AI 2018_files/jquery.dropotron.min.js.download"></script>
+<script src="./Snake AI 2018_files/jquery.scrollex.min.js.download"></script>
+<script src="./Snake AI 2018_files/skel.min.js.download"></script>
+
+<script src="./Snake AI 2018_files/util.js.download"></script>
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="./Snake AI 2018_files/main.js.download"></script>
+
+
+<ul style="user-select: none; display: none; position: absolute; z-index: 1000;" class="dropotron level-0">
+
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#game" style="display: block; cursor: pointer;">Game Mechanics</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#interact" style="display: block; cursor: pointer;">Input and Output</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#scoring" style="display: block; cursor: pointer;">Scoring</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#java" style="display: block; cursor: pointer;">Java</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#cpp" style="display: block; cursor: pointer;">C++</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#python" style="display: block; cursor: pointer;">Python</a></li>
+                            <li style="white-space: nowrap;"><a href="http://snake.ms.wits.ac.za/docs.php#config" style="display: block; cursor: pointer;">Configuration</a></li>
+                        </ul><div id="navButton"><a href="http://snake.ms.wits.ac.za/docs.php#navPanel" class="toggle"></a></div><div id="navPanel"><nav><a class="link depth-0" href="http://snake.ms.wits.ac.za/" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Home</a><a class="link depth-0" href="http://snake.ms.wits.ac.za/docs.php" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Docs</a><a class="link depth-1" href="http://snake.ms.wits.ac.za/docs.php#game" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>Game Mechanics</a><a class="link depth-1" href="http://snake.ms.wits.ac.za/docs.php#interact" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>Input and Output</a><a class="link depth-1" href="http://snake.ms.wits.ac.za/docs.php#scoring" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>Scoring</a><a class="link depth-1" href="http://snake.ms.wits.ac.za/docs.php#java" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>Java</a><a class="link depth-1" href="http://snake.ms.wits.ac.za/docs.php#cpp" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>C++</a><a class="link depth-1" href="http://snake.ms.wits.ac.za/docs.php#python" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>Python</a><a class="link depth-1" href="http://snake.ms.wits.ac.za/docs.php#config" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>Configuration</a><a class="link depth-0" href="http://snake.ms.wits.ac.za/download.php" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Downloads</a><a class="link depth-0" href="http://snake.ms.wits.ac.za/submit.php" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Submit</a><a class="link depth-0" href="http://snake.ms.wits.ac.za/watch.php" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Watch</a><a class="link depth-0" href="http://snake.ms.wits.ac.za/help.php" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Help</a><a class="link depth-0" href="http://snake.ms.wits.ac.za/login.php" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Login</a><a class="link depth-0" href="http://snake.ms.wits.ac.za/register.php" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Register</a></nav><a href="http://snake.ms.wits.ac.za/docs.php#navPanel" class="close" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></a></div></body></html>
