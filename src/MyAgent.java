@@ -56,6 +56,8 @@ public class MyAgent extends DevelopmentAgent {
                 Point p = new Point(x,y);
                 if (p.equals(apple)) {
                     row.append("A");
+                } else if (path.contains(p)) {
+                    row.append("+");
                 } else if (p.equals(lastMe.head)) {
                     row.append("H");
                 } else if (artMap[y][x]) {
@@ -67,6 +69,7 @@ public class MyAgent extends DevelopmentAgent {
             log(row.toString());
         }
         log("==================================================");
+        log("Moved: "+Direction.toString(lastMove));
     }
 
     @Override
@@ -122,6 +125,11 @@ public class MyAgent extends DevelopmentAgent {
                     logMap(6);
                     log("Respawned");
                 }
+
+                if (turn % 10 == 0) {
+                    logMap(7);
+                }
+
                 // reset the map
                 map = new int[h][w];
                 for (int i = 0; i < nSnakes; i++) {
@@ -323,17 +331,11 @@ public class MyAgent extends DevelopmentAgent {
 //        move[1] = (int)heuristic(me.head, apple);
 
         if (move[1] > appleScore || getClosestSnakeID(apple) != me.id) {
-            if (center.distanceTo(me.head) > 5 && centralise) {
-                move[0] = getSimpleMovement(me, center);
-            } else {
-                centralise = false;
-                move[0] = getSimpleMovement(me, me.tail);
-            }
-        } else {
-            centralise = true;
+            move[0] = getThreadingMovement(me, me.head.directionTo(apple));
         }
 
         // ensure our final move is safe and/or legal and output it
+        // TODO: Tie break unsafe moves to choose the safest one (rank moves)
         move[0] = makeSafe(me, move[0]);
         if (move[0] == Direction.NONE) {
             move[0] = makeLegal(me, move[0]);
@@ -457,47 +459,6 @@ public class MyAgent extends DevelopmentAgent {
     }
 
     private int makeLegal(Snake snake, int direction) {
-        // FIXME: In the situation where the only 2 possible moves will both lead to an articulation point, no legal move is found
-//         A) The snake reaches across the entire board and hits a wall
-//         |==================================================|
-//         |00000000000000000000000000000000000000000000000000|
-//         |00000000000000000000000000000000000000000000000000|
-//         |0000000000000000000000000000000000000000000000000X|
-//         |1111111111111111111111111111111111111111111111111H|
-//         |1111111110000000000000000000000000000000000000000X|
-//         |00000000000000000000000000000000000000000000000000|
-//         |00000000000000000000000000000000000000000000000000|
-//         |==================================================|
-//         B) The snake comes up against another snake and is left with only 1 option to move to, which is an articulation point
-//         |00000000000000000000000000000000000000000000000000|
-//         |00000000000000000000000000000000000000000000000000|
-//         |11111111111111111111110000000000000000000000000000|
-//         |11H44444000000000000000000000000000000000000000000|
-//         |00X33333000000000000000000000000000000000000000000|
-//         |00000000000000000000000000000000000000000000000000|
-//         |00000000000000000000000000000000000000000000000000|
-//         |==================================================|
-//         C) The snake closes is about to close off a circle. Is this shape even possible??
-//         |==================================================|
-//         |00000000000000000000000000000000000000000000000000|
-//         |00000000000000000000000000000000000000000000000000|
-//         |00000000000000000011111110000000000000000000000000|
-//         |00000000000000001110XXXXHX000000000000000000000000|
-//         |00000000000000001111111111000000000000000000000000|
-//         |00000000000000000000000000000000000000000000000000|
-//         |00000000000000000000000000000000000000000000000000|
-//         |==================================================|
-//         D) The snake closes off a loop by hitting another snake
-//         |==================================================|
-//         |00000000000000000000444444000000000000000000000000|
-//         |00000000000000000000400000000000000000000000000000|
-//         |00000000000044444444400000000000000000000000000000|
-//         |0000000000004000XHXXXX0000000000000000000000000000|
-//         |00000000000040000111111111111111000000000000000000|
-//         |00000000000044444400000000000001111111111111110000|
-//         |00000000000000000000000000000000000000000111110000|
-//         |==================================================|
-
         int i = 0;
 
         if (direction == Direction.FORWARD || direction == Direction.NONE) {
@@ -512,7 +473,6 @@ public class MyAgent extends DevelopmentAgent {
             }
             direction = Direction.next(direction);
         }
-
         return Direction.NONE;
     }
 
@@ -569,7 +529,7 @@ public class MyAgent extends DevelopmentAgent {
             }
         }
     }
-    // Forest fire algorithm
+
     private boolean floodFill(Point from, int maxArea) {
         if (map[from.y][from.x] != 0) {
             return false;
@@ -605,7 +565,6 @@ public class MyAgent extends DevelopmentAgent {
                 }
             }
         }
-        log("Filled "+area+"/"+maxArea+" from "+from);
         return (area >= maxArea);
     }
 
@@ -641,28 +600,34 @@ public class MyAgent extends DevelopmentAgent {
         return direction;
     }
 
-    private int getDirectBacktrackMovement(Snake snake, Point target) {
-        //TODO: Finish this, a faster path-finding algorithm
-        // Find a straight line in the direction of the target
-        Point head = snake.body[0];
-        int direction = head.directionTo(target);
-
-        ArrayList<Point> path = new ArrayList<>();
-
-        // Walk directly to the apple until we hit an obstacle
-        int x = head.x + Direction.deltaX(direction), y = head.y + Direction.deltaY(direction);
-        Point p = new Point(x,y);
-        while (map[y][x] == 0 && !p.equals(target)) {
-            x += Direction.deltaX(direction);
-            y += Direction.deltaY(direction);
-            direction = p.directionTo(apple);
-            if (map[y][x] != 0) {
+    LinkedList<Point> path = new LinkedList<>();
+    ArrayList<Point> searchGraph = new ArrayList<>();
+    HashMap<Point, ArrayList<Point>> edges;
+    private LinkedList<Point> findPath(Snake snake, Point target) {
+        //TODO: Detect changes along the path
+        // Walk along the path and check if the neighbours match my record.
+        int lastIndex = 0;
+        for (int i = 0; i < path.size(); i++) {
+            Point p = path.get(i);
+            ArrayList<Point> neighbours = getNeighbours(p);
+            for (Point n : neighbours) {
+                if (map[n.y][n.x] != 0) {
+                    neighbours.remove(n);
+                }
+            }
+            if (!neighbours.equals(edges.get(p))) {
+                lastIndex = i;
                 break;
             }
-            path.add(p);
         }
-        return Direction.NONE;
-
+        // Update path and map from this point
+        if (lastIndex > 0) {
+            log("Detected change at " +path.get(lastIndex));
+            LinkedList newPath = findAStarPath(path.get(lastIndex), target);
+            path = (LinkedList<Point>)path.subList(0, lastIndex);
+            path.addAll(newPath);
+        }
+        return path;
     }
 
     private int getThreadingMovement(Snake snake, int direction) {
@@ -682,16 +647,7 @@ public class MyAgent extends DevelopmentAgent {
         return Direction.FORWARD;
     }
 
-    private int[] getAStarMovement(Snake snake, Point target) {
-        /*
-        TODO: Optimise and improve speed
-            - JPS (https://zerowidth.com/2013/05/05/jump-point-search-explained.html)
-            - LPA* / D* Lite
-            - HPA*
-            - Rectangular Symmetry Reduction
-            - Rectangular Expansion A*
-        */
-
+    private LinkedList<Point> findAStarPath(Point start, Point target) {
         ArrayList<Point> open = new ArrayList<>();
         ArrayList<Point> closed = new ArrayList<>();
 
@@ -701,11 +657,10 @@ public class MyAgent extends DevelopmentAgent {
 
         HashMap<Point, Point> cameFrom = new HashMap<>();
 
-        Point start = snake.head;
         open.add(start);
         gScores.put(start, 0);
         fScores.put(start, heuristic(start, target));
-
+        boolean found = false;
         while (!open.isEmpty()) {
             Point current = open.get(0);
             for (Point p : open) {
@@ -715,6 +670,7 @@ public class MyAgent extends DevelopmentAgent {
             }
 
             if (target.equals(current)){
+                found = true;
                 break;
             }
 
@@ -739,24 +695,48 @@ public class MyAgent extends DevelopmentAgent {
             }
         }
 
-        // Cycle back until we get to the start
-        Point nextPoint = target;
-        int[] result = new int[2];
-        while (nextPoint != null && cameFrom.get(nextPoint) != start) {
-            result[1]++;
-            nextPoint = cameFrom.get(nextPoint);
+        if (!found) {
+            return new LinkedList<>();
         }
 
-        if (nextPoint == null) {
-            result[0] = Direction.NONE;
-        } else if (nextPoint.x > start.x) {
-            result[0] = Direction.EAST;
-        } else if (nextPoint.x < start.x){
-            result[0] = Direction.WEST;
-        } else if (nextPoint.y > start.y) {
-            result[0] = Direction.SOUTH;
+        // Cycle back until we get to the start
+        Point nextPoint = target;
+        LinkedList<Point> path = new LinkedList<>();
+        while (nextPoint != null) {
+            path.add(nextPoint);
+            nextPoint = cameFrom.get(nextPoint);
         }
-        // defaults to 0 (NORTH)
+        return path;
+    }
+
+    private int[] getAStarMovement(Snake snake, Point target) {
+        /*
+        TODO: Optimise and improve speed
+            - JPS (https://zerowidth.com/2013/05/05/jump-point-search-explained.html)
+            - LPA* / D* Lite
+            - HPA*
+            - Rectangular Symmetry Reduction
+            - Rectangular Expansion A*
+        */
+
+        path = findAStarPath(snake.head, apple);
+        Point nextPoint = path.pollLast();
+        int[] result = new int[2];
+        result[1] = path.size();
+        log(nextPoint +", "+snake.head);
+        if (path.size() == 0) {
+            result[0] =  Direction.NONE;
+        } else if (nextPoint.westOf(snake.head)) {
+            result[0] = Direction.WEST;
+        } else if (nextPoint.eastOf(snake.head)) {
+            result[0] = Direction.EAST;
+        } else if (nextPoint.southOf(snake.head)) {
+            result[0] = Direction.SOUTH;
+        } else if (nextPoint.northOf(snake.head)) {
+            result[0] = Direction.NORTH;
+        } else {
+            result[0] = Direction.NONE;
+        }
         return result;
     }
 

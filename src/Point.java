@@ -43,8 +43,14 @@ public class Point {
     public boolean westOf(Point other) {
         return other.x > this.x;
     }
+    public boolean eastOf(Point other) {
+        return other.x < this.x;
+    }
     public boolean northOf(Point other) {
         return other.y > this.y;
+    }
+    public boolean southOf(Point other) {
+        return other.y < this.y;
     }
 
     public int distanceTo(Point other) {
