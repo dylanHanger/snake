@@ -4,8 +4,10 @@ import za.ac.wits.snake.DevelopmentAgent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class MyAgent extends DevelopmentAgent {
@@ -69,7 +71,6 @@ public class MyAgent extends DevelopmentAgent {
             log(row.toString());
         }
         log("==================================================");
-        log("Moved: "+Direction.toString(lastMove));
     }
 
     @Override
@@ -124,10 +125,6 @@ public class MyAgent extends DevelopmentAgent {
                     }
                     logMap(6);
                     log("Respawned");
-                }
-
-                if (turn % 10 == 0) {
-                    logMap(7);
                 }
 
                 // reset the map
@@ -288,48 +285,15 @@ public class MyAgent extends DevelopmentAgent {
 //            return true;
 //        } else return attackPhase == 1 && Direction.isVertical(myHeading) != Direction.isVertical(victimHeading);
 //    }
-
-    private void doRankedStyleMovement() {
-        // FIXME: Move priorities are off (taking head on collisions over safe moves)
-        Point center = new Point(w/2, h/2);
-        int bestMove;
-        int bestScore;
-        int score;
-        // Go to the apple
-        int[] move = getAStarMovement(me ,apple);
-        bestMove = move[0];
-        bestScore = scoreMove(me, move[0]);
-
-        // Centralise
-        if (center.distanceTo(me.head) > 5 && (move[1] > appleScore || getClosestSnakeID(apple) != me.id)) {
-            move[0] = getSimpleMovement(me, center);
-            score = scoreMove(me, move[0]);
-            if (score > bestScore) {
-                bestMove = move[0];
-                bestScore = score;
-            }
-        }
-
-        // Thread
-        move[0] = getThreadingMovement(me, me.head.directionTo(me.tail));
-        score = scoreMove(me, move[0]);
-        if (score > bestScore) {
-            bestMove = move[0];
-            bestScore = score;
-        }
-
-        System.out.println(bestMove);
-    }
-
     private boolean centralise;
     private void doDirectStyleMovement() {
         // TODO: Rework this
         long startTime = System.nanoTime();
         Point center = new Point(w/2, h/2);
-        int[] move = getAStarMovement(me, apple);
-//        move[0] = getSimpleMovement(me, apple);
-//        move[1] = (int)heuristic(me.head, apple);
-
+        path = findAStarPath(me.head, apple);
+        int[] move = new int[2];
+        move[1] = path.size();
+        move[0] = getMoveTo(me, path.peekLast());
         if (move[1] > appleScore || getClosestSnakeID(apple) != me.id) {
             move[0] = getThreadingMovement(me, me.head.directionTo(apple));
         }
@@ -345,6 +309,23 @@ public class MyAgent extends DevelopmentAgent {
         turnTime = endTime - startTime;
 
         System.out.println(move[0]);
+    }
+
+    private int getMoveTo(Snake snake, Point point) {
+        Point head = snake.head;
+        if (point != null) {
+            if (point.westOf(snake.head)) {
+                return Direction.WEST;
+            } else if (point.eastOf(snake.head)) {
+                return Direction.EAST;
+            } else if (point.southOf(snake.head)) {
+                return Direction.SOUTH;
+            } else if (point.northOf(snake.head)) {
+                return Direction.NORTH;
+            }
+        }
+        log("No move");
+        return Direction.NONE;
     }
 
     private int getClosestSnakeID(Point point) {
@@ -370,7 +351,6 @@ public class MyAgent extends DevelopmentAgent {
 
         while (i++ < 4) {
             if (isSafeMove(snake, direction)) {
-                //log("Chose safe move "+Direction.toString(direction));
                 return direction;
             }
             direction = Direction.next(direction);
@@ -391,7 +371,7 @@ public class MyAgent extends DevelopmentAgent {
             return false;
         }
         if (artMap[head.y][head.x]) {
-            if (!floodFill(nextHead, snake.length)) {
+            if (!canFit(nextHead, snake.length)) {
                 return false;
             }
         }
@@ -429,7 +409,7 @@ public class MyAgent extends DevelopmentAgent {
         Point nextHead = getNextHead(snake, direction);
         Point head = snake.head;
 
-        // If I will be eating an apple if I make this move
+        // If I will be eating an apple when I make this move
         if (nextHead.equals(apple)) {
             if (appleScore < -40 || appleScore*10 <= -snake.length) {
                 score = 0; // Deadly apple
@@ -441,7 +421,7 @@ public class MyAgent extends DevelopmentAgent {
         }
 
         if (artMap[head.y][head.x]) {
-            if (!floodFill(nextHead, snake.length) && 2 < score) {
+            if (!canFit(nextHead, snake.length) && 2 < score) {
                 score = 2; // Dead end
             }
         }
@@ -498,14 +478,15 @@ public class MyAgent extends DevelopmentAgent {
                 Point p = new Point(x,y);
                 if (!visited[y][x]) {
                     outEdgeCount = 0;
-                    dfs(p, p,null, low, ids, visited);
+                    findArtPoints(p, p, null, low, ids, visited);
                     artMap[y][x] = (outEdgeCount > 1);
                 }
             }
         }
     }
 
-    private void dfs(Point root, Point at, Point parent, int[][] low, int[][] ids, boolean[][] visited) {
+    // Depth first search
+    private void findArtPoints(Point root, Point at, Point parent, int[][] low, int[][] ids, boolean[][] visited) {
         if (root.equals(parent)) {
             outEdgeCount++;
         }
@@ -519,7 +500,7 @@ public class MyAgent extends DevelopmentAgent {
                 continue;
             }
             if (!visited[to.y][to.x]) {
-                dfs(root, to, at, low, ids, visited);
+                findArtPoints(root, to, at, low, ids, visited);
                 low[at.y][at.x] = Math.min(low[at.y][at.x], low[to.y][to.x]);
                 if (ids[at.y][at.x] <= low[to.y][to.x]) {
                     artMap[at.y][at.x] = true;
@@ -530,7 +511,7 @@ public class MyAgent extends DevelopmentAgent {
         }
     }
 
-    private boolean floodFill(Point from, int maxArea) {
+    private boolean canFit(Point from, int maxArea) {
         if (map[from.y][from.x] != 0) {
             return false;
         }
@@ -601,8 +582,8 @@ public class MyAgent extends DevelopmentAgent {
     }
 
     LinkedList<Point> path = new LinkedList<>();
-    ArrayList<Point> searchGraph = new ArrayList<>();
-    HashMap<Point, ArrayList<Point>> edges;
+    ArrayList<Point> searchGraph = new ArrayList<>(); // the vertices that have been searched
+    HashMap<Point, ArrayList<Point>> edges = new HashMap<>(); // The vertices connected to each vertex in the graph
     private LinkedList<Point> findPath(Snake snake, Point target) {
         //TODO: Detect changes along the path
         // Walk along the path and check if the neighbours match my record.
@@ -610,22 +591,30 @@ public class MyAgent extends DevelopmentAgent {
         for (int i = 0; i < path.size(); i++) {
             Point p = path.get(i);
             ArrayList<Point> neighbours = getNeighbours(p);
-            for (Point n : neighbours) {
+            Iterator<Point> itr = neighbours.iterator();
+            while (itr.hasNext()) {
+                Point n = itr.next();
                 if (map[n.y][n.x] != 0) {
-                    neighbours.remove(n);
+                    itr.remove();
                 }
             }
-            if (!neighbours.equals(edges.get(p))) {
+            if (edges.get(p) != null && !neighbours.containsAll(edges.get(p))) {
                 lastIndex = i;
                 break;
             }
         }
+        logMap(7);
         // Update path and map from this point
         if (lastIndex > 0) {
-            log("Detected change at " +path.get(lastIndex));
             LinkedList newPath = findAStarPath(path.get(lastIndex), target);
-            path = (LinkedList<Point>)path.subList(0, lastIndex);
+            LinkedList<Point> subPath = new LinkedList<>();
+            for (int i = 0; i < lastIndex; i++) {
+                subPath.add(path.pollFirst());
+            }
+            path = subPath;
             path.addAll(newPath);
+        } else if (path.size() == 0) {
+            path = findAStarPath(snake.head, target);
         }
         return path;
     }
@@ -678,7 +667,12 @@ public class MyAgent extends DevelopmentAgent {
             closed.add(current);
 
             int gScore = gScores.get(current) + 1;
-            for (Point n : getNeighbours(current)) {
+            ArrayList<Point> neighbours = getNeighbours(current);
+            if (!searchGraph.contains(current)) {
+                searchGraph.add(current);
+            }
+            edges.put(current, neighbours);
+            for (Point n : neighbours) {
                 if (closed.contains(n) || map[n.y][n.x] > 0) {
                     continue;
                 }
@@ -702,7 +696,7 @@ public class MyAgent extends DevelopmentAgent {
         // Cycle back until we get to the start
         Point nextPoint = target;
         LinkedList<Point> path = new LinkedList<>();
-        while (nextPoint != null) {
+        while (nextPoint != null && nextPoint != start) {
             path.add(nextPoint);
             nextPoint = cameFrom.get(nextPoint);
         }
@@ -720,11 +714,11 @@ public class MyAgent extends DevelopmentAgent {
         */
 
         path = findAStarPath(snake.head, apple);
-        Point nextPoint = path.pollLast();
+        int pathLength = path.size();
+        Point nextPoint = path.peekLast();
         int[] result = new int[2];
         result[1] = path.size();
-        log(nextPoint +", "+snake.head);
-        if (path.size() == 0) {
+        if (pathLength == 0) {
             result[0] =  Direction.NONE;
         } else if (nextPoint.westOf(snake.head)) {
             result[0] = Direction.WEST;
