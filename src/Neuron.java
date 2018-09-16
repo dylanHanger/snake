@@ -1,11 +1,8 @@
 public class Neuron {
-    double[] value;
-    final int layer; // i
-    final int index; // j
+    // Neuron class, a node in the neural network
+    int id;
 
-    public Neuron(int i, int j) {
-        value = new double[2]; // [1,0] or [0,1]
-        layer = i;
-        index = j;
+    public Neuron(int id) {
+        this.id = id;
     }
 }

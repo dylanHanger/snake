@@ -3,17 +3,17 @@ import za.ac.wits.snake.DevelopmentAgent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.InterruptedIOException;
+import java.util.ArrayList;
 import java.util.Random;
 
-public class MachineLearningAgent extends DevelopmentAgent {
+// TODO: https://medium.com/@savas/craig-using-neural-networks-to-learn-mario-a76036b639ad
+// TODO: https://github.com/joenot443/crAIg/tree/master/NEAT
+public class NEATAgent extends DevelopmentAgent {
 
     public static void main(String args[]) {
-        MachineLearningAgent agent = new MachineLearningAgent();
-        MachineLearningAgent.start(agent, args);
+        NEATAgent agent = new NEATAgent();
+        NEATAgent.start(agent, args);
     }
-
-    Neuron[] inputs;
 
     int w;
     int h;
@@ -26,10 +26,6 @@ public class MachineLearningAgent extends DevelopmentAgent {
             int nSnakes = Integer.parseInt(temp[0]);
             w = Integer.parseInt(temp[1]);
             h = Integer.parseInt(temp[2]);
-
-            Neuron[] inputs = new Neuron[w*h];
-            Neuron[] hiddenLayer = new Neuron[10]; // idk, 10?
-            Neuron[] outputs = new Neuron[4]; // TODO: this won't work, fix it. Should they even be neurons?
 
             while (true) {
                 String line = br.readLine();
@@ -56,14 +52,24 @@ public class MachineLearningAgent extends DevelopmentAgent {
         }
     }
 
+    ArrayList<Species> epoch;
 
-    // Inputs
-        // The same input I am given? aka the coordinates of the corners of each snake, their kills and length. Different types??
-        // 4 direction search + distance to features (apple, snake, wall)
-        // Every single Point in the grid. (0,1) for obstacle and (1,0) for apple = 5000 inputs
+    double totalNormalFitness;
 
-    // Outputs
-        // (1,0,0,0), (0,1,0,0), (0,0,1,0), (0,0,0,1) for N,S,W,E - complete gameplay
-        // (x,y) the next target to path to - general strategy
+    void train() {
+        totalNormalFitness = calcTotalNormalFitness();
+    }
 
+    int countWeaklings(Species species) {
+        return (int) Math.floor(species.sumNormalFitness / totalNormalFitness) - 1;
+    }
+
+    double calcTotalNormalFitness() {
+        double totalFitness = 0;
+        for (Species s : epoch) {
+            s.normalizeFitness();
+            totalFitness += s.sumNormalFitness;
+        }
+        return totalFitness;
+    }
 }
