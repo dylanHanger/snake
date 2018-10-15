@@ -1,6 +1,5 @@
 /bin/
-
-/.idea/
+.idea/
 /.settings/
 /lib/
 ExampleSnake.iml

@@ -1,3 +1,5 @@
+package dAIsy;
+
 public class Point {
 
     public final int x;
@@ -40,22 +42,42 @@ public class Point {
         }
     }
 
-    public boolean westOf(Point other) {
-        return other.x > this.x;
-    }
-    public boolean eastOf(Point other) {
-        return other.x < this.x;
-    }
-    public boolean northOf(Point other) {
-        return other.y > this.y;
-    }
-    public boolean southOf(Point other) {
-        return other.y < this.y;
+    public boolean adjacentTo(Point other) {
+        return this.manhattanTo(other) == 1;
     }
 
-    public int distanceTo(Point other) {
-        //return Math.abs(this.x - other.x) + Math.abs(this.y - other.y);
+    public boolean closeTo(Point other, double r) {
+        return this.manhattanTo(other) <= r;
+    }
+
+    public int getQuadrant(int w, int h) {
+        if (x < w/2) {
+            if (y < h/2) {
+                return 2;
+            } else {
+                return 3;
+            }
+        } else {
+            if (y < h/2) {
+                return 1;
+            } else {
+                return 4;
+            }
+        }
+    }
+
+    public int euclideanTo(Point other) {
+        if (other == null) {
+            return 0x7fffffff;
+        }
         return (int)Math.sqrt((this.x-other.x)*(this.x-other.x) + (this.y-other.y)*(this.y-other.y));
+    }
+
+    public int manhattanTo(Point other) {
+        if (other == null) {
+            return 0x7fffffff;
+        }
+        return Math.abs(this.x - other.x) + Math.abs(this.y - other.y);
     }
 
     public String toString(){

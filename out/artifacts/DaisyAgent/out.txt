@@ -1,0 +1,701 @@
+
+0ms for turn 5648 (deaths:2)
+
+1ms for turn 5649 (deaths:2)
+
+1ms for turn 5650 (deaths:2)
+
+0ms for turn 5651 (deaths:2)
+
+1ms for turn 5652 (deaths:2)
+
+0ms for turn 5653 (deaths:2)
+
+0ms for turn 5654 (deaths:2)
+
+0ms for turn 5655 (deaths:2)
+
+1ms for turn 5656 (deaths:2)
+
+1ms for turn 5657 (deaths:2)
+
+0ms for turn 5658 (deaths:2)
+
+1ms for turn 5659 (deaths:2)
+
+0ms for turn 5660 (deaths:2)
+
+0ms for turn 5661 (deaths:2)
+
+0ms for turn 5662 (deaths:2)
+
+0ms for turn 5663 (deaths:2)
+
+1ms for turn 5664 (deaths:2)
+
+3ms for turn 5665 (deaths:2)
+
+2ms for turn 5666 (deaths:2)
+
+3ms for turn 5667 (deaths:2)
+
+3ms for turn 5668 (deaths:2)
+
+2ms for turn 5669 (deaths:2)
+
+1ms for turn 5670 (deaths:2)
+
+2ms for turn 5671 (deaths:2)
+
+1ms for turn 5672 (deaths:2)
+
+1ms for turn 5673 (deaths:2)
+
+2ms for turn 5674 (deaths:2)
+
+1ms for turn 5675 (deaths:2)
+
+1ms for turn 5676 (deaths:2)
+
+2ms for turn 5677 (deaths:2)
+
+1ms for turn 5678 (deaths:2)
+
+2ms for turn 5679 (deaths:2)
+
+2ms for turn 5680 (deaths:2)
+
+2ms for turn 5681 (deaths:2)
+
+1ms for turn 5682 (deaths:2)
+
+3ms for turn 5683 (deaths:2)
+
+3ms for turn 5684 (deaths:2)
+
+3ms for turn 5685 (deaths:2)
+
+3ms for turn 5686 (deaths:2)
+
+2ms for turn 5687 (deaths:2)
+
+2ms for turn 5688 (deaths:2)
+
+2ms for turn 5689 (deaths:2)
+
+3ms for turn 5690 (deaths:2)
+
+1ms for turn 5691 (deaths:2)
+
+2ms for turn 5692 (deaths:2)
+
+2ms for turn 5693 (deaths:2)
+
+2ms for turn 5694 (deaths:2)
+
+1ms for turn 5695 (deaths:2)
+
+1ms for turn 5696 (deaths:2)
+
+0ms for turn 5697 (deaths:2)
+
+1ms for turn 5698 (deaths:2)
+
+1ms for turn 5699 (deaths:2)
+
+0ms for turn 5700 (deaths:2)
+
+1ms for turn 5701 (deaths:2)
+
+0ms for turn 5702 (deaths:2)
+
+1ms for turn 5703 (deaths:2)
+
+0ms for turn 5704 (deaths:2)
+
+0ms for turn 5705 (deaths:2)
+
+0ms for turn 5706 (deaths:2)
+
+1ms for turn 5707 (deaths:2)
+
+0ms for turn 5708 (deaths:2)
+
+2ms for turn 5709 (deaths:2)
+
+2ms for turn 5710 (deaths:2)
+
+2ms for turn 5711 (deaths:2)
+
+1ms for turn 5712 (deaths:2)
+
+1ms for turn 5713 (deaths:2)
+
+0ms for turn 5714 (deaths:2)
+
+0ms for turn 5715 (deaths:2)
+
+1ms for turn 5716 (deaths:2)
+
+0ms for turn 5717 (deaths:2)
+
+0ms for turn 5718 (deaths:2)
+
+2ms for turn 5719 (deaths:2)
+
+2ms for turn 5720 (deaths:2)
+
+2ms for turn 5721 (deaths:2)
+
+2ms for turn 5722 (deaths:2)
+
+2ms for turn 5723 (deaths:2)
+
+2ms for turn 5724 (deaths:2)
+
+1ms for turn 5725 (deaths:2)
+
+2ms for turn 5726 (deaths:2)
+
+1ms for turn 5727 (deaths:2)
+
+1ms for turn 5728 (deaths:2)
+
+2ms for turn 5729 (deaths:2)
+
+2ms for turn 5730 (deaths:2)
+
+3ms for turn 5731 (deaths:2)
+
+1ms for turn 5732 (deaths:2)
+
+2ms for turn 5733 (deaths:2)
+
+1ms for turn 5734 (deaths:2)
+
+2ms for turn 5735 (deaths:2)
+
+2ms for turn 5736 (deaths:2)
+
+2ms for turn 5737 (deaths:2)
+
+1ms for turn 5738 (deaths:2)
+
+2ms for turn 5739 (deaths:2)
+
+2ms for turn 5740 (deaths:2)
+
+5ms for turn 5741 (deaths:2)
+
+2ms for turn 5742 (deaths:2)
+
+2ms for turn 5743 (deaths:2)
+
+2ms for turn 5744 (deaths:2)
+
+1ms for turn 5745 (deaths:2)
+
+2ms for turn 5746 (deaths:2)
+
+1ms for turn 5747 (deaths:2)
+
+1ms for turn 5748 (deaths:2)
+
+2ms for turn 5749 (deaths:2)
+
+1ms for turn 5750 (deaths:2)
+
+2ms for turn 5751 (deaths:2)
+
+3ms for turn 5752 (deaths:2)
+
+2ms for turn 5753 (deaths:2)
+
+3ms for turn 5754 (deaths:2)
+
+2ms for turn 5755 (deaths:2)
+
+2ms for turn 5756 (deaths:2)
+
+2ms for turn 5757 (deaths:2)
+
+1ms for turn 5758 (deaths:2)
+
+2ms for turn 5759 (deaths:2)
+
+2ms for turn 5760 (deaths:2)
+
+2ms for turn 5761 (deaths:2)
+
+2ms for turn 5762 (deaths:2)
+
+2ms for turn 5763 (deaths:2)
+
+1ms for turn 5764 (deaths:2)
+
+2ms for turn 5765 (deaths:2)
+
+1ms for turn 5766 (deaths:2)
+
+2ms for turn 5767 (deaths:2)
+
+1ms for turn 5768 (deaths:2)
+
+1ms for turn 5769 (deaths:2)
+
+1ms for turn 5770 (deaths:2)
+
+2ms for turn 5771 (deaths:2)
+
+1ms for turn 5772 (deaths:2)
+
+2ms for turn 5773 (deaths:2)
+
+1ms for turn 5774 (deaths:2)
+
+2ms for turn 5775 (deaths:2)
+
+0ms for turn 5776 (deaths:2)
+
+2ms for turn 5777 (deaths:2)
+
+2ms for turn 5778 (deaths:2)
+
+2ms for turn 5779 (deaths:2)
+
+2ms for turn 5780 (deaths:2)
+
+0ms for turn 5781 (deaths:2)
+
+0ms for turn 5782 (deaths:2)
+
+0ms for turn 5783 (deaths:2)
+
+0ms for turn 5784 (deaths:2)
+
+0ms for turn 5785 (deaths:2)
+
+0ms for turn 5786 (deaths:2)
+
+0ms for turn 5787 (deaths:2)
+
+2ms for turn 5788 (deaths:2)
+
+1ms for turn 5789 (deaths:2)
+
+0ms for turn 5790 (deaths:2)
+
+1ms for turn 5791 (deaths:2)
+
+1ms for turn 5792 (deaths:2)
+
+1ms for turn 5793 (deaths:2)
+
+1ms for turn 5794 (deaths:2)
+
+1ms for turn 5795 (deaths:2)
+
+1ms for turn 5796 (deaths:2)
+
+1ms for turn 5797 (deaths:2)
+
+1ms for turn 5798 (deaths:2)
+
+1ms for turn 5799 (deaths:2)
+
+1ms for turn 5800 (deaths:2)
+
+0ms for turn 5801 (deaths:2)
+
+0ms for turn 5802 (deaths:2)
+
+1ms for turn 5803 (deaths:2)
+
+0ms for turn 5804 (deaths:2)
+
+0ms for turn 5805 (deaths:2)
+
+0ms for turn 5806 (deaths:2)
+
+0ms for turn 5807 (deaths:2)
+
+0ms for turn 5808 (deaths:2)
+
+1ms for turn 5809 (deaths:2)
+
+0ms for turn 5810 (deaths:2)
+
+0ms for turn 5811 (deaths:2)
+
+1ms for turn 5812 (deaths:2)
+
+1ms for turn 5813 (deaths:2)
+
+0ms for turn 5814 (deaths:2)
+
+1ms for turn 5815 (deaths:2)
+
+1ms for turn 5816 (deaths:2)
+
+0ms for turn 5817 (deaths:2)
+
+0ms for turn 5818 (deaths:2)
+
+0ms for turn 5819 (deaths:2)
+
+0ms for turn 5820 (deaths:2)
+
+0ms for turn 5821 (deaths:2)
+
+0ms for turn 5822 (deaths:2)
+
+0ms for turn 5823 (deaths:2)
+
+0ms for turn 5824 (deaths:2)
+
+3ms for turn 5825 (deaths:2)
+
+4ms for turn 5826 (deaths:2)
+
+2ms for turn 5827 (deaths:2)
+
+1ms for turn 5828 (deaths:2)
+
+1ms for turn 5829 (deaths:2)
+
+1ms for turn 5830 (deaths:2)
+
+2ms for turn 5831 (deaths:2)
+
+2ms for turn 5832 (deaths:2)
+
+1ms for turn 5833 (deaths:2)
+
+2ms for turn 5834 (deaths:2)
+
+2ms for turn 5835 (deaths:2)
+
+1ms for turn 5836 (deaths:2)
+
+1ms for turn 5837 (deaths:2)
+
+2ms for turn 5838 (deaths:2)
+
+2ms for turn 5839 (deaths:2)
+
+2ms for turn 5840 (deaths:2)
+
+2ms for turn 5841 (deaths:2)
+
+2ms for turn 5842 (deaths:2)
+
+2ms for turn 5843 (deaths:2)
+
+1ms for turn 5844 (deaths:2)
+
+1ms for turn 5845 (deaths:2)
+
+2ms for turn 5846 (deaths:2)
+
+2ms for turn 5847 (deaths:2)
+
+1ms for turn 5848 (deaths:2)
+
+2ms for turn 5849 (deaths:2)
+
+2ms for turn 5850 (deaths:2)
+
+2ms for turn 5851 (deaths:2)
+
+2ms for turn 5852 (deaths:2)
+
+2ms for turn 5853 (deaths:2)
+
+2ms for turn 5854 (deaths:2)
+
+2ms for turn 5855 (deaths:2)
+
+2ms for turn 5856 (deaths:2)
+
+2ms for turn 5857 (deaths:2)
+
+2ms for turn 5858 (deaths:2)
+
+0ms for turn 5859 (deaths:2)
+
+1ms for turn 5860 (deaths:2)
+
+1ms for turn 5861 (deaths:2)
+
+0ms for turn 5862 (deaths:2)
+
+0ms for turn 5863 (deaths:2)
+
+2ms for turn 5864 (deaths:2)
+
+1ms for turn 5865 (deaths:2)
+
+1ms for turn 5866 (deaths:2)
+
+1ms for turn 5867 (deaths:2)
+
+1ms for turn 5868 (deaths:2)
+
+1ms for turn 5869 (deaths:2)
+
+2ms for turn 5870 (deaths:2)
+
+0ms for turn 5871 (deaths:2)
+
+6ms for turn 5872 (deaths:2)
+
+3ms for turn 5873 (deaths:2)
+
+3ms for turn 5874 (deaths:2)
+
+2ms for turn 5875 (deaths:2)
+
+1ms for turn 5876 (deaths:2)
+
+2ms for turn 5877 (deaths:2)
+
+1ms for turn 5878 (deaths:2)
+
+1ms for turn 5879 (deaths:2)
+
+1ms for turn 5880 (deaths:2)
+
+2ms for turn 5881 (deaths:2)
+
+1ms for turn 5882 (deaths:2)
+
+1ms for turn 5883 (deaths:2)
+
+1ms for turn 5884 (deaths:2)
+
+1ms for turn 5885 (deaths:2)
+
+3ms for turn 5886 (deaths:2)
+
+3ms for turn 5887 (deaths:2)
+
+1ms for turn 5888 (deaths:2)
+
+2ms for turn 5889 (deaths:2)
+
+2ms for turn 5890 (deaths:2)
+
+2ms for turn 5891 (deaths:2)
+
+2ms for turn 5892 (deaths:2)
+
+2ms for turn 5893 (deaths:2)
+
+2ms for turn 5894 (deaths:2)
+
+2ms for turn 5895 (deaths:2)
+
+1ms for turn 5896 (deaths:2)
+
+2ms for turn 5897 (deaths:2)
+
+2ms for turn 5898 (deaths:2)
+
+2ms for turn 5899 (deaths:2)
+
+2ms for turn 5900 (deaths:2)
+
+2ms for turn 5901 (deaths:2)
+
+2ms for turn 5902 (deaths:2)
+
+1ms for turn 5903 (deaths:2)
+
+1ms for turn 5904 (deaths:2)
+
+2ms for turn 5905 (deaths:2)
+
+1ms for turn 5906 (deaths:2)
+
+2ms for turn 5907 (deaths:2)
+
+2ms for turn 5908 (deaths:2)
+
+2ms for turn 5909 (deaths:2)
+
+2ms for turn 5910 (deaths:2)
+
+1ms for turn 5911 (deaths:2)
+
+1ms for turn 5912 (deaths:2)
+
+1ms for turn 5913 (deaths:2)
+
+0ms for turn 5914 (deaths:2)
+
+0ms for turn 5915 (deaths:2)
+
+1ms for turn 5916 (deaths:2)
+
+1ms for turn 5917 (deaths:2)
+
+1ms for turn 5918 (deaths:2)
+
+1ms for turn 5919 (deaths:2)
+
+1ms for turn 5920 (deaths:2)
+
+0ms for turn 5921 (deaths:2)
+
+0ms for turn 5922 (deaths:2)
+
+0ms for turn 5923 (deaths:2)
+
+0ms for turn 5924 (deaths:2)
+
+0ms for turn 5925 (deaths:2)
+
+0ms for turn 5926 (deaths:2)
+
+2ms for turn 5927 (deaths:2)
+
+0ms for turn 5928 (deaths:2)
+
+1ms for turn 5929 (deaths:2)
+
+3ms for turn 5930 (deaths:2)
+
+1ms for turn 5931 (deaths:2)
+
+2ms for turn 5932 (deaths:2)
+
+1ms for turn 5933 (deaths:2)
+
+1ms for turn 5934 (deaths:2)
+
+2ms for turn 5935 (deaths:2)
+
+2ms for turn 5936 (deaths:2)
+
+2ms for turn 5937 (deaths:2)
+
+1ms for turn 5938 (deaths:2)
+
+1ms for turn 5939 (deaths:2)
+
+0ms for turn 5940 (deaths:2)
+
+4ms for turn 5941 (deaths:2)
+
+1ms for turn 5942 (deaths:2)
+
+2ms for turn 5943 (deaths:2)
+
+2ms for turn 5944 (deaths:2)
+
+1ms for turn 5945 (deaths:2)
+
+2ms for turn 5946 (deaths:2)
+
+2ms for turn 5947 (deaths:2)
+
+1ms for turn 5948 (deaths:2)
+
+3ms for turn 5949 (deaths:2)
+
+2ms for turn 5950 (deaths:2)
+
+1ms for turn 5951 (deaths:2)
+
+2ms for turn 5952 (deaths:2)
+
+1ms for turn 5953 (deaths:2)
+
+2ms for turn 5954 (deaths:2)
+
+3ms for turn 5955 (deaths:2)
+
+2ms for turn 5956 (deaths:2)
+
+1ms for turn 5957 (deaths:2)
+
+1ms for turn 5958 (deaths:2)
+
+1ms for turn 5959 (deaths:2)
+
+1ms for turn 5960 (deaths:2)
+
+1ms for turn 5961 (deaths:2)
+
+0ms for turn 5962 (deaths:2)
+
+1ms for turn 5963 (deaths:2)
+
+0ms for turn 5964 (deaths:2)
+
+0ms for turn 5965 (deaths:2)
+
+1ms for turn 5966 (deaths:2)
+
+0ms for turn 5967 (deaths:2)
+
+0ms for turn 5968 (deaths:2)
+
+0ms for turn 5969 (deaths:2)
+
+0ms for turn 5970 (deaths:2)
+
+0ms for turn 5971 (deaths:2)
+
+1ms for turn 5972 (deaths:2)
+
+1ms for turn 5973 (deaths:2)
+
+0ms for turn 5974 (deaths:2)
+
+1ms for turn 5975 (deaths:2)
+
+0ms for turn 5976 (deaths:2)
+
+1ms for turn 5977 (deaths:2)
+
+0ms for turn 5978 (deaths:2)
+
+1ms for turn 5979 (deaths:2)
+
+1ms for turn 5980 (deaths:2)
+
+1ms for turn 5981 (deaths:2)
+
+3ms for turn 5982 (deaths:2)
+
+0ms for turn 5983 (deaths:2)
+
+0ms for turn 5984 (deaths:2)
+
+1ms for turn 5985 (deaths:2)
+
+0ms for turn 5986 (deaths:2)
+
+1ms for turn 5987 (deaths:2)
+
+1ms for turn 5988 (deaths:2)
+
+1ms for turn 5989 (deaths:2)
+
+1ms for turn 5990 (deaths:2)
+
+1ms for turn 5991 (deaths:2)
+
+1ms for turn 5992 (deaths:2)
+
+1ms for turn 5993 (deaths:2)
+
+0ms for turn 5994 (deaths:2)
+
+1ms for turn 5995 (deaths:2)
+
+1ms for turn 5996 (deaths:2)
+
+1ms for turn 5997 (deaths:2)
+===============================End of Game===============================

@@ -1,4 +1,6 @@
-public class Direction {
+package dAIsy;
+
+class Direction {
     public static final int NONE = -1;
     public static final int NORTH = 0;
     public static final int SOUTH = 1;
@@ -15,7 +17,8 @@ public class Direction {
             case EAST: return WEST;
             case WEST: return EAST;
             case LEFT: return RIGHT;
-            case RIGHT: return LEFT;
+            case RIGHT:
+                return LEFT;
             default: return FORWARD;
         }
     }
@@ -26,6 +29,12 @@ public class Direction {
             case SOUTH: return WEST;
             case WEST: return EAST;
             case EAST: return NORTH;
+            case LEFT:
+                return RIGHT;
+            case RIGHT:
+                return FORWARD;
+            case FORWARD:
+                return LEFT;
             default: return FORWARD;
         }
     }

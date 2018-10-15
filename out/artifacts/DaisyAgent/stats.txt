@@ -1,0 +1,12 @@
+maxd 5
+maxl 152
+maxk 43
+minl 59
+mink 4
+avgl 110
+avgd 1
+avgk 19
+games 36
+totl 3944
+totd 49
+totk 695

@@ -1,10 +1,14 @@
-public class Snake {
-    public boolean alive;
-    public int id, length, kills;
-    public Point[] body;
+package dAIsy;
+
+class Snake {
+    public final boolean alive;
+    public final int id;
+    public final int length;
+    public final int kills;
+    public final Point[] body;
 
     public Point head;
-    public Point neck;
+    private Point neck;
     public Point tail;
 
     public Snake(int id, String[] data) {
@@ -44,10 +48,11 @@ public class Snake {
             case 1: return "Red";
             case 2: return "Green";
             case 3: return "Blue";
-            case 4: return "Yellow";
+            case 4: return "Mustard";
             case 5: return "Pink";
             case 6: return "Purple";
             case 7: return "Cyan";
+            case 8: return "Yellow";
             default: return "snake "+id;
         }
     }

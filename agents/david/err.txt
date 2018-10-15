@@ -1,0 +1,124 @@
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
+Exception in thread "main" java.lang.NullPointerException
+	at MyAgent.run(MyAgent.java:56)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at MyAgent.main(MyAgent.java:18)
