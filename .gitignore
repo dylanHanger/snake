@@ -1,7 +1,8 @@
-/bin/
+bin/
 .idea/
-/.settings/
-/lib/
+.settings/
+lib/
+out/
 ExampleSnake.iml
 .project
 .classpath
