@@ -7,3 +7,5 @@ ExampleSnake.iml
 .project
 .classpath
 Snake AI 2018_files/
+out/artifacts/DaisyAgent/err.txt
+out/artifacts/DaisyAgent/out.txt

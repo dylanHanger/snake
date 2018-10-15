@@ -493,6 +493,20 @@ class Daisy extends DevelopmentAgent {
         lastMove = move;
     }
 
+    private int findCircleMove(Snake snake, int r) {
+        Point center = new Point(w / 2, h / 2);
+        int circleMove = Direction.FORWARD;
+        double distance = -1;
+        for (int move = Direction.LEFT; move <= Direction.RIGHT; move++) {
+            double newDist = getNextHead(me, move).euclideanTo(center) - r;
+            if (distance < 0 || newDist < distance) {
+                distance = newDist;
+                circleMove = move;
+            }
+        }
+        return circleMove;
+    }
+
     private double calcSafety(Snake snake, int move) {
         // Lowest of:
             // Deadly apple         0

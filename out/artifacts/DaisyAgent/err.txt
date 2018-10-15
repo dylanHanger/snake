@@ -7,47 +7,6 @@
 
 
 
-	at dAIsy.Daisy.main(Daisy.java:105)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Exception in thread "main" java.lang.NullPointerException
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -68,6 +27,14 @@
 
 
 	at dAIsy.Daisy.run(Daisy.java:296)
+
+
+
+
+
+
+
+
 
 
 
@@ -127,7 +94,23 @@
 
 
 
+
+
+
+
+
+
+
+
 	at dAIsy.Daisy.main(Daisy.java:105)
+
+
+
+
+
+
+
+
 
 
 
@@ -187,7 +170,23 @@
 
 
 
+
+
+
+
+
+
+
+
 	at dAIsy.Daisy.run(Daisy.java:296)
+
+
+
+
+
+
+
+
 
 
 
@@ -247,7 +246,23 @@
 
 
 
+
+
+
+
+
+
+
+
 	at dAIsy.Daisy.main(Daisy.java:105)
+
+
+
+
+
+
+
+
 
 
 
@@ -307,7 +322,23 @@
 
 
 
+
+
+
+
+
+
+
+
 	at dAIsy.Daisy.run(Daisy.java:296)
+
+
+
+
+
+
+
+
 
 
 
@@ -367,7 +398,23 @@
 
 
 
+
+
+
+
+
+
+
+
 	at dAIsy.Daisy.main(Daisy.java:105)
+
+
+
+
+
+
+
+
 
 
 
@@ -427,7 +474,23 @@
 
 
 
+
+
+
+
+
+
+
+
 	at dAIsy.Daisy.run(Daisy.java:296)
+
+
+
+
+
+
+
+
 
 
 
@@ -487,7 +550,23 @@
 
 
 
+
+
+
+
+
+
+
+
 	at dAIsy.Daisy.main(Daisy.java:105)
+
+
+
+
+
+
+
+
 
 
 
@@ -547,118 +626,6 @@
 
 
 
-	at dAIsy.Daisy.run(Daisy.java:296)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	at dAIsy.Daisy.main(Daisy.java:105)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Exception in thread "main" java.lang.NullPointerException
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -697,5 +664,53 @@
 
 
 
+
+
+
+
+
+
+
+
 	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
-	at dAIsy.Daisy.main(Daisy.java:105)
+
+
+
+
+
+
+
+
+	at dAIsy.Daisy.main(Daisy.java:105)Exception in thread "main" java.lang.NullPointerException
+
+
+
+
+
+
+
+	at dAIsy.Daisy.run(Daisy.java:296)
+
+
+
+
+
+
+
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at dAIsy.Daisy.main(Daisy.java:105)Exception in thread "main" java.lang.NullPointerException
+	at dAIsy.Daisy.run(Daisy.java:295)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at dAIsy.Daisy.main(Daisy.java:104)
+Exception in thread "main" java.lang.NullPointerException
+	at dAIsy.Daisy.run(Daisy.java:295)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at dAIsy.Daisy.main(Daisy.java:104)
+Exception in thread "main" java.lang.NullPointerException
+	at dAIsy.Daisy.run(Daisy.java:295)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at dAIsy.Daisy.main(Daisy.java:104)
+Exception in thread "main" java.lang.NullPointerException
+	at dAIsy.Daisy.run(Daisy.java:295)
+	at za.ac.wits.snake.DevelopmentAgent.start(DevelopmentAgent.java:55)
+	at dAIsy.Daisy.main(Daisy.java:104)
