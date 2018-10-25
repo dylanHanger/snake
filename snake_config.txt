@@ -3,3 +3,4 @@ game_width 50
 game_height 50
 duration 150
 speed 25
+random_seed test

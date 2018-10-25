@@ -54,52 +54,6 @@ class Daisy extends DevelopmentAgent {
     private int lastMove;
 
     public static void main(String args[]) {
-        try {
-            List<String> stats = Files.readAllLines(Paths.get("stats.txt"));
-            for (String line : stats) {
-                String[] data = line.split(" ");
-                switch (data[0]) {
-                    case "maxd":
-                        maxDeaths = Integer.parseInt(data[1]);
-                        break;
-                    case "maxl":
-                        maxLength = Integer.parseInt(data[1]);
-                        break;
-                    case "maxk":
-                        maxKills = Integer.parseInt(data[1]);
-                        break;
-                    case "minl":
-                        minLength = Integer.parseInt(data[1]);
-                        break;
-                    case "mink":
-                        minKills = Integer.parseInt(data[1]);
-                        break;
-                    case "avgl":
-                        avgLength = Integer.parseInt(data[1]);
-                        break;
-                    case "avgd":
-                        avgDeaths = Integer.parseInt(data[1]);
-                        break;
-                    case "avgk":
-                        avgKills = Integer.parseInt(data[1]);
-                        break;
-                    case "games":
-                        games = Integer.parseInt(data[1]);
-                        break;
-                    case "totl":
-                        totalLength = Integer.parseInt(data[1]);
-                        break;
-                    case "totd":
-                        totalDeaths = Integer.parseInt(data[1]);
-                        break;
-                    case "totk":
-                        totalKills = Integer.parseInt(data[1]);
-                        break;
-                }
-            }
-        } catch (IOException e) {
-            log ("No stats file");
-        }
         Daisy agent = new Daisy();
         Daisy.start(agent, args);
     }
@@ -344,49 +298,6 @@ class Daisy extends DevelopmentAgent {
                 }
                 log(turnTime + "ms for turn " + turn + " (deaths:" + deaths + ")");
             }
-            // Cleanup
-            games++;
-            totalDeaths += deaths;
-            totalLength += myLongest;
-            totalKills += me.kills;
-            maxKills = Math.max(maxKills, me.kills);
-            maxLength = Math.max(maxLength, myLongest);
-            maxDeaths = Math.max(maxDeaths, deaths);
-            minKills = Math.min(minKills, me.kills);
-            minLength = Math.min(minLength, myLongest);
-            avgKills = Math.round((float) totalKills / games);
-            avgLength = Math.round((float) totalLength / games);
-            avgDeaths = Math.round((float) totalDeaths / games);
-            try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter("stats.txt"));
-                bw.write("maxd " + maxDeaths);
-                bw.newLine();
-                bw.write("maxl " + maxLength);
-                bw.newLine();
-                bw.write("maxk " + maxKills);
-                bw.newLine();
-                bw.write("minl " + minLength);
-                bw.newLine();
-                bw.write("mink " + minKills);
-                bw.newLine();
-                bw.write("avgl " + avgLength);
-                bw.newLine();
-                bw.write("avgd " + avgDeaths);
-                bw.newLine();
-                bw.write("avgk " + avgKills);
-                bw.newLine();
-                bw.write("games " + games);
-                bw.newLine();
-                bw.write("totl " + totalLength);
-                bw.newLine();
-                bw.write("totd " + totalDeaths);
-                bw.newLine();
-                bw.write("totk " + totalKills);
-                bw.newLine();
-                bw.close();
-            } catch (IOException e) {
-                log ("No stats file");
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -539,7 +450,7 @@ class Daisy extends DevelopmentAgent {
             }
         }
 
-        // TODO: Improve future dead end detection.
+        // TODO URGENT: Improve future dead end detection.
         // TODO: Compute connected components to determine flood mode or not?
         int area = canFit(nextHead, snake.length);
         if ((artMap[snake.head.y][snake.head.x] && area < snake.length)) {
@@ -714,7 +625,6 @@ class Daisy extends DevelopmentAgent {
     private double heuristic(Point a, Point b) {
         double score = a.euclideanTo(b);
         score += countWalls(a) - 1;
-        //TODO: Create a territory map. (Voronoi diagram seeded by snake heads). Breadth first search from every point to the first snake, marking that as its "owner".
         //TODO: other heuristic stuff?
         return score;
     }
